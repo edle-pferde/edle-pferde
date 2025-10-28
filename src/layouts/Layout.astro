@@ -1,14 +1,15 @@
 ---
-import  SpeedInsights  from "@vercel/speed-insights/astro"
+import SpeedInsights from "@vercel/speed-insights/astro"
 import "../styles/global.css";
 import Menu from "../components/Menu.astro";
 import Footer from "../components/Footer.astro";
 
 export interface Props {
   title: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const { title, image } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="de">
@@ -21,7 +22,7 @@ const { title } = Astro.props;
 
     <meta property="og:title" content={title}>
     <meta property="og:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich">
-    <meta property="og:image" content="https://edle-pferde.com/hero.webp">
+    <meta property="og:image" content={image || "https://edle-pferde.com/hero.webp"}>
     <meta property="og:url" content="https://edle-pferde.com/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="de_AT">
@@ -31,7 +32,7 @@ const { title } = Astro.props;
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich">
-    <meta name="twitter:image" content="https://edle-pferde.com/hero.webp">
+    <meta name="twitter:image" content={image || "https://edle-pferde.com/hero.webp"}>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" href="/favicon_dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)">

@@ -35,7 +35,7 @@ export async function getStaticPaths() {
   return horses.map(horse => ({ params: { slug: horse.slug } }));
 }
 ---
-<Layout title={horse.data.full_name}>
+<Layout title={horse.data.full_name} image={horse.data.profile_picture.src}>
   <div class="page-width mx-auto space-y-16 px-4 md:px-0">
     <div class="space-y-4">
       <div class="space-y-1">
