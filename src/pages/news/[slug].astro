@@ -34,7 +34,7 @@ function formatDate(date: Date) {
   }).format(date);
 }
 ---
-<Layout title={article.data.title} image={horse.data.cover_image.src}>
+<Layout title={article.data.title} image={article.data.cover_image.src}>
   <div class="page-width mx-auto space-y-16">
     <Image
       src={article.data.cover_image}
