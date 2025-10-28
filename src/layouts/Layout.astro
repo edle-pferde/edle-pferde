@@ -13,24 +13,23 @@ const { title } = Astro.props;
 <!DOCTYPE html>
 <html lang="de">
   <head>
-  <title>Trakehner Gestüt Pichl</title>
-  <meta name="description" content="Trakehnerzucht aus Leidenschaft in Oberösterreich. Das Trakehner Gestüt Pichl der Familie Pramendorfer züchtet edle Trakehner Sport- und Freizeitpferde mit besten Rittigkeitseigenschaften. Informieren Sie sich über unsere Verkaufspferde!">
-  <meta name="keywords" content="Trakehner, Pferdezucht, Gestüt, Trakehner Gestüt, Pichl, Oberösterreich, Pramendorfer, Pferde, Verkaufspferde, Sportpferde, Reitpferde">
-  <meta name="author" content="Gestüt Pichl - Familie Pramendorfer">
+    <title>{title}</title>
+    <meta name="description" content="4716 Hofkirchen an der Trattnach, Oberösterreich">
+    <meta name="keywords" content="Trakehner, Pferdezucht, Gestüt, Trakehner Gestüt, Pichl, Oberösterreich, Pramendorfer, Pferde, Verkaufspferde, Sportpferde, Reitpferde">
+    <meta name="author" content="Familie Pramendorfer">
 
-  <meta property="og:title" content={title ? title + " - Trakehner Gestüt Pichl": "Trakehner Gestüt Pichl"}>
-  <meta property="og:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich">
-  <meta property="og:image" content="https://edle-pferde.com/hero.webp">
-  <meta property="og:url" content="https://edle-pferde.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="de_AT">
-  <meta property="og:site_name" content="Trakehner Gestüt Pichl">
-  <meta property="og:logo" content="https://edle-pferde.com/logo.svg" />
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich">
+    <meta property="og:image" content="https://edle-pferde.com/hero.webp">
+    <meta property="og:url" content="https://edle-pferde.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_AT">
+    <meta property="og:site_name" content="Trakehner Gestüt Pichl">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content={title ? title + " - Trakehner Gestüt Pichl": "Trakehner Gestüt Pichl"}>
-  <meta name="twitter:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich">
-  <meta name="twitter:image" content="https://edle-pferde.com/hero.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title ? title + " - Trakehner Gestüt Pichl": "Trakehner Gestüt Pichl"}>
+    <meta name="twitter:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich">
+    <meta name="twitter:image" content="https://edle-pferde.com/hero.webp">
 
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" href="/favicon_dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)">
