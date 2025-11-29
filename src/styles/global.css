@@ -42,3 +42,29 @@ h1 {
 h2 {
     @apply text-xl sm:text-2xl font-semibold;
 }
+
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #bbbbbb;
+  border-bottom: 2px solid #bbbbbb;
+  margin-right: 12px;
+  margin-bottom: 2px;
+  transition: transform 0.2s ease-in-out;
+  transform: rotate(-45deg);
+}
+
+details[open] summary::before {
+  transform: rotate(45deg);
+}
