@@ -25,6 +25,9 @@ export default defineConfig({
         dts: './auto-imports.d.ts',
       }),
     ],
+    build: {
+      chunkSizeWarningLimit: 3000,
+    },
   },
 
   adapter: vercel(),
