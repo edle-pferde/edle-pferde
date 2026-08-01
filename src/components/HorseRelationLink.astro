@@ -3,12 +3,12 @@ import { getCollection } from "astro:content";
 const { horseName } = Astro.props;
 
 const horses = await getCollection('horses');
-const horse = horses.find(h => h.slug === horseName.value)
+const horse = horses.find(h => h.id === horseName.value)
 ---
 <span class="text-center">
   {horse &&
     <div class="line-clamp-3">
-      <a href={`/pferde/${horse?.slug}`} class="underline text-brand font-semibold">
+      <a href={`/pferde/${horse?.id}`} class="underline text-brand font-semibold">
         {horse.data.full_name}
       </a>
     </div>

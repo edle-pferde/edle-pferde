@@ -1,5 +1,5 @@
 ---
-import { getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { IconCalendar, IconColorPicker, IconGenderFemale, IconGenderMale, IconHorseshoe, IconRuler } from "@tabler/icons-react";
 import YoutubeEmbedVideo from "../../components/YoutubeEmbedVideo.astro";
@@ -12,7 +12,7 @@ if (!slug) throw new Error("Slug not found");
 const horse = await getEntry("horses", slug);
 if (!horse) throw new Error("No horse found for this slug");
 
-const { Content } = await horse.render();
+const { Content } = await render(horse);
 
 const allImages = [
   { ...horse.data.profile_picture, featured: true },
@@ -20,19 +20,13 @@ const allImages = [
   || []
 ];
 
-const horses = await reader.collections.horses.all();
-let children = horses.filter(horse => horse.entry.mother.value === slug);
-children = children.map(child => {
-  return {
-    ...child,
-    data: child.entry
-  };
-});
+const horses = await getCollection("horses");
+const children = horses.filter(horse => horse.data.mother?.value === slug);
 
 // Generate static pages
 export async function getStaticPaths() {
-  const horses = await reader.collections.horses.all();
-  return horses.map(horse => ({ params: { slug: horse.slug } }));
+  const horses = await getCollection("horses");
+  return horses.map(horse => ({ params: { slug: horse.id } }));
 }
 ---
 <Layout title={horse.data.full_name} image={horse.data.profile_picture.src}>
@@ -172,7 +166,7 @@ export async function getStaticPaths() {
         </h2>
         <div class="grid md:grid-cols-4 grid-cols-2 gap-4">
           {children?.map(horse => (
-            <MiniHorseCard horseSlug={horse.slug} />
+            <MiniHorseCard horseSlug={horse.id} />
           ))}
         </div>
       </div>

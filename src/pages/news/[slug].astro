@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
 import MiniHorseCard from "../../components/horses/MiniHorseCard.astro";
@@ -10,20 +10,20 @@ if (!slug) throw new Error("Slug not found");
 const article = await getEntry("articles", slug);
 if (!article) throw new Error("No article found for this slug");
 
-const { Content } = await article.render();
+const { Content } = await render(article);
 
 const horses = await getCollection("horses");
 if (article.data.horses?.length) {
   article.data.horsesData = [];
   article.data.horses.forEach((horseSlug, i) => {
-    article.data.horsesData[i] = horses.find(h => h.slug === horseSlug);
+    article.data.horsesData[i] = horses.find(h => h.id === horseSlug);
   });
 }
 
 // Generate static pages
 export async function getStaticPaths() {
-  const articles = await reader.collections.articles.all();
-  return articles.map(article => ({ params: { slug: article.slug } }));
+  const articles = await getCollection("articles");
+  return articles.map(article => ({ params: { slug: article.id } }));
 }
 
 function formatDate(date: Date) {
@@ -59,7 +59,7 @@ function formatDate(date: Date) {
           </h2>
           <div class="grid md:grid-cols-4 grid-cols-2 gap-4">
             {article.data.horsesData?.map(horse => (
-              <MiniHorseCard horseSlug={horse.slug} />
+              <MiniHorseCard horseSlug={horse.id} />
             ))}
           </div>
         </div>

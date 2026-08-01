@@ -2,16 +2,16 @@
 import Image from "astro/components/Image.astro";
 const { article } = Astro.props;
 ---
-<a href={`/news/${article.slug}`} class="md:row-span-4 col-span-4">
+<a href={`/news/${article.id}`} class="md:row-span-4 col-span-4">
   <div class="relative aspect-3/2 lg:aspect-2/1">
     <Image
       src={article.data.cover_image}
-      alt={`${article.slug}`}
+      alt={`${article.id}`}
       height={0}
       width={0}
       loading="eager"
       class="object-cover z-10 rounded-lg w-full h-full"
-      transition:name={`article-${article.slug}`}
+      transition:name={`article-${article.id}`}
     />
     <div class="absolute inset-0 bg-gradient-to-t from from-black via-transparent z-10 rounded-b-lg" />
     <div class="absolute bottom-4 inset-x-4 z-10 space-y-1">
