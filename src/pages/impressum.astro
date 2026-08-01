@@ -1,15 +1,17 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import {getEntry, render} from 'astro:content'
+import Layout from "../layouts/Layout.astro"
+import { getEntry, render } from "astro:content"
 
-const impressum = await getEntry('pages', 'impressum')
-const {Content} = await render(impressum)
+const impressum = await getEntry("pages", "impressum")
+if (!impressum) throw new Error("Impressum page not found")
+const { Content } = await render(impressum)
 ---
+
 <Layout title="Impressum">
-    <main class="page-width mx-auto px-4 md:px-0">
-        <div class="prose">
-            <h1>{impressum.data.title}</h1>
-            <Content/>
-        </div>
-    </main>
+  <main class="page-width mx-auto px-4 md:px-0">
+    <div class="prose">
+      <h1>{impressum.data.title}</h1>
+      <Content />
+    </div>
+  </main>
 </Layout>

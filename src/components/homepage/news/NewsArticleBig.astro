@@ -1,8 +1,9 @@
 ---
-import Image from "astro/components/Image.astro";
-const { article } = Astro.props;
+import Image from "astro/components/Image.astro"
+const { article } = Astro.props
 ---
-<a href={`/news/${article.id}`} class="md:row-span-4 col-span-4">
+
+<a href={`/news/${article.id}`} class="col-span-4 md:row-span-4">
   <div class="relative aspect-3/2 lg:aspect-2/1">
     <Image
       src={article.data.cover_image}
@@ -10,13 +11,15 @@ const { article } = Astro.props;
       height={0}
       width={0}
       loading="eager"
-      class="object-cover z-10 rounded-lg w-full h-full"
+      class="z-10 h-full w-full rounded-lg object-cover"
       transition:name={`article-${article.id}`}
     />
-    <div class="absolute inset-0 bg-gradient-to-t from from-black via-transparent z-10 rounded-b-lg" />
-    <div class="absolute bottom-4 inset-x-4 z-10 space-y-1">
-      <div class="text-xl md:text-3xl text-white font-semibold line-clamp-2">{article.data.title}</div>
-      <p class="hidden md:line-clamp-2 text-white/75 text-sm">{article.body}</p>
+    <div class="absolute inset-0 z-10 rounded-b-lg bg-linear-to-t from-black via-transparent"></div>
+    <div class="absolute inset-x-4 bottom-4 z-10 space-y-1">
+      <div class="line-clamp-2 text-xl font-semibold text-white md:text-3xl">
+        {article.data.title}
+      </div>
+      <p class="hidden text-sm text-white/75 md:line-clamp-2">{article.body}</p>
     </div>
   </div>
 </a>

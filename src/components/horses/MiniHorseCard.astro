@@ -1,45 +1,46 @@
 ---
-import Image from 'astro/components/Image.astro'
-import {IconCalendar, IconHorseshoe} from "@tabler/icons-react"
-import { getEntry } from "astro:content";
+import Image from "astro/components/Image.astro"
+import { getEntry } from "astro:content"
 
-const {horseSlug} = Astro.props
-const horse = await getEntry("horses", horseSlug);
+const { horseSlug } = Astro.props
+const horse = await getEntry("horses", horseSlug)
+if (!horse) throw new Error(`Horse not found: ${horseSlug}`)
 
-let cropPosition = ''
+let cropPosition = ""
 switch (horse.data.profile_picture_crop_position) {
   case "top-left":
-    cropPosition = 'object-top-left'
-    break;
+    cropPosition = "object-top-left"
+    break
   case "top":
-    cropPosition = 'object-top'
-    break;
+    cropPosition = "object-top"
+    break
   case "top-right":
-    cropPosition = 'object-top-right'
-    break;
+    cropPosition = "object-top-right"
+    break
   case "left":
-    cropPosition = 'object-left'
-    break;
+    cropPosition = "object-left"
+    break
   case "right":
-    cropPosition = 'object-right'
-    break;
+    cropPosition = "object-right"
+    break
   case "bottom-left":
-    cropPosition = 'object-bottom-left'
-    break;
+    cropPosition = "object-bottom-left"
+    break
   case "bottom":
-    cropPosition = 'object-bottom'
-    break;
+    cropPosition = "object-bottom"
+    break
   case "bottom-right":
-    cropPosition = 'object-bottom-right'
-    break;
+    cropPosition = "object-bottom-right"
+    break
   case "center":
   default:
-    cropPosition = 'object-center'
-    break;
+    cropPosition = "object-center"
+    break
 }
 ---
+
 <a href={`/pferde/${horse.id}`} class="box">
-  <div class="bg-white overflow-auto rounded shadow flex flex-col">
+  <div class="flex flex-col overflow-auto rounded bg-white shadow">
     <Image
       src={horse.data.profile_picture}
       alt={`${horse.id}`}
@@ -48,8 +49,8 @@ switch (horse.data.profile_picture_crop_position) {
       loading="eager"
       class={`object-cover aspect-square size-full ${cropPosition}`}
     />
-    <div class="p-6 space-y-1">
-      <div class="font-semibold text-xl line-clamp-1">
+    <div class="space-y-1 p-6">
+      <div class="line-clamp-1 text-xl font-semibold">
         {horse.data.full_name}
       </div>
     </div>

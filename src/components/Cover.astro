@@ -1,8 +1,9 @@
 ---
-import Image from "astro/components/Image.astro";
-import { IconHorse, IconUserHeart, IconMedal, IconMapPin } from "@tabler/icons-react";
+import Image from "astro/components/Image.astro"
+import { IconHorse, IconUserHeart, IconMedal, IconMapPin } from "@tabler/icons-react"
 ---
-<div class="flex flex-col -mt-16">
+
+<div class="-mt-16 flex flex-col">
   <Image
     src="/hero.webp"
     alt="Stute mit Fohlen"
@@ -10,34 +11,25 @@ import { IconHorse, IconUserHeart, IconMedal, IconMapPin } from "@tabler/icons-r
     height={800}
     quality={75}
     loading="eager"
-    class="h-[50vh] md:h-[80vh] 2xl:h-[800px] object-cover mx-auto"
+    class="mx-auto h-[50vh] object-cover md:h-[80vh] 2xl:h-200"
   />
   <div class="px-4">
-    <div
-      class="mx-auto -mt-20 grid gap-px md:grid-cols-4 grid-cols-2 page-width items-center bg-gray-200 overflow-auto rounded-2xl shadow-2xl">
-      <div class="flex flex-col items-center p-8 space-y-3 bg-white h-full justify-center">
+    <div class="page-width mx-auto -mt-20 grid grid-cols-2 items-center gap-px overflow-auto rounded-2xl bg-gray-200 shadow-2xl md:grid-cols-4">
+      <div class="flex h-full flex-col items-center justify-center space-y-3 bg-white p-8">
         <IconHorse className="text-primary-800 size-10" />
-        <div class="relative w-fit font-normal text-brand text-base text-center text-balance">
-          Familiäre Pferdezucht
-        </div>
+        <div class="text-brand relative w-fit text-center text-base font-normal text-balance">Familiäre Pferdezucht</div>
       </div>
-      <div class="flex flex-col items-center p-8 space-y-3 bg-white h-full justify-center">
+      <div class="flex h-full flex-col items-center justify-center space-y-3 bg-white p-8">
         <IconUserHeart className="text-primary-800 size-10" />
-        <div class="relative w-fit font-normal text-brand text-base text-center text-balance">
-          30 Jahre Erfahrung
-        </div>
+        <div class="text-brand relative w-fit text-center text-base font-normal text-balance">30 Jahre Erfahrung</div>
       </div>
-      <div class="flex flex-col items-center p-8 space-y-3 bg-white h-full justify-center">
-        <IconMedal className="fill-primary-800 size-10 stroke-primary-800" />
-        <div class="relative w-fit font-normal text-brand text-base text-center text-balance">
-          Individuelle Ausbildung
-        </div>
+      <div class="flex h-full flex-col items-center justify-center space-y-3 bg-white p-8">
+        <IconMedal className="fill-primary-800 stroke-primary-800 size-10" />
+        <div class="text-brand relative w-fit text-center text-base font-normal text-balance">Individuelle Ausbildung</div>
       </div>
-      <div class="flex flex-col items-center p-8 space-y-3 bg-white h-full justify-center">
+      <div class="flex h-full flex-col items-center justify-center space-y-3 bg-white p-8">
         <IconMapPin className="text-primary-800 size-10" />
-        <div class="relative w-fit font-normal text-brand text-base text-center text-balance">
-          Im Herzen des Hausruckviertels
-        </div>
+        <div class="text-brand relative w-fit text-center text-base font-normal text-balance">Im Herzen des Hausruckviertels</div>
       </div>
     </div>
   </div>

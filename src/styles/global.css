@@ -1,46 +1,48 @@
 @import url(https://fonts.bunny.net/css?family=montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i);
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@plugin '@tailwindcss/typography';
+@plugin "@tailwindcss/typography";
 
 @theme {
-    --font-sans: "montserrat", sans-serif;
+  --font-sans: "montserrat", sans-serif;
 
-    --color-brand-light: #5D6E50;
-    --color-brand: #4B5945;
+  --color-brand-light: #5d6e50;
+  --color-brand: #4b5945;
 
-    --color-primary: oklch(89.89% 0.10142 91.688);
-    --color-primary-50: oklch(99.343% 0.00667 97.349);
-    --color-primary-100: oklch(98.246% 0.01792 89.355);
-    --color-primary-200: oklch(96.149% 0.0394 91.199);
-    --color-primary-300: oklch(94.072% 0.06166 92.132);
-    --color-primary-400: oklch(91.866% 0.08112 91.296);
-    --color-primary-500: oklch(89.89% 0.10142 91.688);
-    --color-primary-600: oklch(86.715% 0.12904 90.946);
-    --color-primary-700: oklch(83.897% 0.15006 90.056);
-    --color-primary-800: oklch(81.051% 0.16037 87.313);
-    --color-primary-900: oklch(73.049% 0.14644 86.427);
-    --color-primary-950: oklch(68.186% 0.1365 86.987);
+  --color-primary: oklch(89.89% 0.10142 91.688);
+  --color-primary-50: oklch(99.343% 0.00667 97.349);
+  --color-primary-100: oklch(98.246% 0.01792 89.355);
+  --color-primary-200: oklch(96.149% 0.0394 91.199);
+  --color-primary-300: oklch(94.072% 0.06166 92.132);
+  --color-primary-400: oklch(91.866% 0.08112 91.296);
+  --color-primary-500: oklch(89.89% 0.10142 91.688);
+  --color-primary-600: oklch(86.715% 0.12904 90.946);
+  --color-primary-700: oklch(83.897% 0.15006 90.056);
+  --color-primary-800: oklch(81.051% 0.16037 87.313);
+  --color-primary-900: oklch(73.049% 0.14644 86.427);
+  --color-primary-950: oklch(68.186% 0.1365 86.987);
 }
 
 .page-width {
-    @apply w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl
+  @apply w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl;
 }
 
 .prose {
-    @apply max-w-none
+  @apply max-w-none;
 }
 
-h1, h2, h3 {
-    @apply text-brand;
+h1,
+h2,
+h3 {
+  @apply text-brand;
 }
 
 h1 {
-    @apply text-3xl sm:text-4xl font-semibold;
+  @apply text-3xl font-semibold sm:text-4xl;
 }
 
 h2 {
-    @apply text-xl sm:text-2xl font-semibold;
+  @apply text-xl font-semibold sm:text-2xl;
 }
 
 summary {
@@ -53,7 +55,7 @@ summary::-webkit-details-marker {
 }
 
 summary::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 8px;
   height: 8px;

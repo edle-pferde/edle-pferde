@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from "../layouts/Layout.astro"
 import Cover from "../components/Cover.astro"
 import News from "../components/News.astro"
 import ForSale from "../components/ForSale.astro"
@@ -7,12 +7,12 @@ import AboutUs from "../components/AboutUs.astro"
 ---
 
 <Layout title="Trakehner Gestüt Pichl">
-    <div class="flex flex-col items-start space-y-32 relative bg-primary-50">
-        <header class="flex flex-col w-full">
-            <Cover/>
-        </header>
-        <News/>
-        <ForSale/>
-        <AboutUs/>
-    </div>
+  <div class="bg-primary-50 relative flex flex-col items-start space-y-32">
+    <header class="flex w-full flex-col">
+      <Cover />
+    </header>
+    <News />
+    <ForSale />
+    <AboutUs />
+  </div>
 </Layout>

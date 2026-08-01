@@ -1,16 +1,14 @@
 ---
-import {getCollection} from 'astro:content'
-import Layout from '../../layouts/Layout.astro'
+import { getCollection } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
 import Article from "../../components/articles/Article.astro"
 
-let articles = await getCollection('articles')
-articles = articles.sort((a, b) => (a.data.created_at < b.data.created_at) ? 1 : ((b.data.created_at < a.data.created_at) ? -1 : 0))
+let articles = await getCollection("articles")
+articles = articles.sort((a, b) => (a.data.created_at < b.data.created_at ? 1 : b.data.created_at < a.data.created_at ? -1 : 0))
 ---
 
 <Layout title="News">
-    <div class="page-width mx-auto flex flex-col space-y-8 px-4">
-      {articles.map(article => (
-              <Article article={article}/>
-      ))}
-    </div>
+  <div class="page-width mx-auto flex flex-col space-y-8 px-4">
+    {articles.map((article) => <Article article={article} />)}
+  </div>
 </Layout>

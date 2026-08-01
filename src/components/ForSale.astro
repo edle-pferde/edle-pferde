@@ -1,27 +1,22 @@
 ---
-import {getCollection} from "astro:content"
-import HorseCard from "./horses/HorseCard.astro";
+import { getCollection } from "astro:content"
+import HorseCard from "./horses/HorseCard.astro"
 
-let horses = await getCollection('horses')
+let horses = await getCollection("horses")
 horses = horses
-  .filter(horse => horse.data.status === 'for-sale')
-  .sort((a, b) => (a.data.birth_year < b.data.birth_year) ? 1 : ((b.data.birth_year < a.data.birth_year) ? -1 : 0))
+  .filter((horse) => horse.data.status === "for-sale")
+  .sort((a, b) => (a.data.birth_year < b.data.birth_year ? 1 : b.data.birth_year < a.data.birth_year ? -1 : 0))
 ---
+
 <div class="page-width mx-auto px-8 md:px-0">
   <div class="flex flex-col items-center justify-center gap-8">
-      <div class="flex flex-col items-center space-y-4">
-        <div class="font-normal text-brand text-3xl text-center">
-          Verkauf
-        </div>
-        <div class="font-bold text-brand text-sm tracking-widest text-center uppercase">
-          Folgende Pferde stehen zum Verkauf
-        </div>
-        <div class="bg-primary-600 w-20 h-1"></div>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
-        {horses.map(horse => (
-          <HorseCard horse={horse} />
-        ))}
-      </div>
+    <div class="flex flex-col items-center space-y-4">
+      <div class="text-brand text-center text-3xl font-normal">Verkauf</div>
+      <div class="text-brand text-center text-sm font-bold tracking-widest uppercase">Folgende Pferde stehen zum Verkauf</div>
+      <div class="bg-primary-600 h-1 w-20"></div>
+    </div>
+    <div class="grid w-full gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {horses.map((horse) => <HorseCard horse={horse} />)}
     </div>
   </div>
+</div>

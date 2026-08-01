@@ -1,50 +1,45 @@
 ---
-import {IconColorPicker, IconHorseshoe, IconRuler, IconCalendar} from '@tabler/icons-react'
-import Image from 'astro/components/Image.astro'
-const {horse} = Astro.props
+import { IconColorPicker, IconHorseshoe, IconRuler, IconCalendar } from "@tabler/icons-react"
+import Image from "astro/components/Image.astro"
+const { horse } = Astro.props
 ---
-<div class="flex bg-white rounded-2xl overflow-hidden shadow-2xl">
-  <div class="flex flex-col items-start justify-between relative flex-1 self-stretch grow">
-    <div class="px-16 py-12 flex flex-col justify-between flex-1">
+
+<div class="flex overflow-hidden rounded-2xl bg-white shadow-2xl">
+  <div class="relative flex flex-1 grow flex-col items-start justify-between self-stretch">
+    <div class="flex flex-1 flex-col justify-between px-16 py-12">
       <div class="text-brand text-3xl text-balance">
         {horse.data.full_name}
       </div>
       <div class="flex flex-col space-y-8">
         <div class="flex items-center space-x-4">
           <IconCalendar className="text-brand" />
-          <div class="relative flex-1 font-normal text-[#1e1e1e] text-base tracking-[0] leading-4">
+          <div class="relative flex-1 text-base leading-4 font-normal tracking-normal text-[#1e1e1e]">
             {horse.data.birth_year}
           </div>
         </div>
         <div class="flex items-center space-x-4">
           <IconHorseshoe className="text-brand" />
-          <div class="relative flex-1 font-normal text-[#1e1e1e] text-base tracking-[0] leading-4">
+          <div class="relative flex-1 text-base leading-4 font-normal tracking-normal text-[#1e1e1e]">
             {horse.data.breed}
           </div>
         </div>
         <div class="flex items-center space-x-4">
           <IconRuler className="text-brand" />
-          <div class="relative flex-1 font-normal text-[#1e1e1e] text-base tracking-[0] leading-4">
+          <div class="relative flex-1 text-base leading-4 font-normal tracking-normal text-[#1e1e1e]">
             {horse.data.size}
           </div>
         </div>
         <div class="flex items-center space-x-4">
           <IconColorPicker className="text-brand" />
-          <div class="relative flex-1 font-normal text-[#1e1e1e] text-base tracking-[0] leading-4">
+          <div class="relative flex-1 text-base leading-4 font-normal tracking-normal text-[#1e1e1e]">
             {horse.data.color}
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="flex flex-col flex-1 relative">
-    <Image
-      class="object-cover aspect-4/3"
-      src={horse.data.profile_picture}
-      alt={`${horse.id}`}
-      width={960}
-      loading="eager"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-white to-25%"></div>
+  <div class="relative flex flex-1 flex-col">
+    <Image class="aspect-4/3 object-cover" src={horse.data.profile_picture} alt={`${horse.id}`} width={960} loading="eager" />
+    <div class="absolute inset-0 bg-linear-to-r from-white to-25%"></div>
   </div>
 </div>

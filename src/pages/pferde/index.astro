@@ -1,27 +1,23 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-import HorseCard from "../../components/horses/HorseCard.astro";
+import Layout from "../../layouts/Layout.astro"
+import { getCollection } from "astro:content"
+import HorseCard from "../../components/horses/HorseCard.astro"
 
-let horses = await getCollection('horses')
-horses = horses.sort((a, b) => (a.data.birth_year < b.data.birth_year) ? 1 : ((b.data.birth_year < a.data.birth_year) ? -1 : 0))
-const activeHorses = horses.filter(horse => horse.data.status === 'active' || horse.data.status === 'for-sale')
+let horses = await getCollection("horses")
+horses = horses.sort((a, b) => (a.data.birth_year < b.data.birth_year ? 1 : b.data.birth_year < a.data.birth_year ? -1 : 0))
+const activeHorses = horses.filter((horse) => horse.data.status === "active" || horse.data.status === "for-sale")
 ---
 
 <Layout title="Pferde">
-    <div class="page-width mx-auto px-4 space-y-12">
-        <div class="space-y-4 text-2xl">
-            <h1>Alle Pferde</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {activeHorses.map(horse => (
-                      <HorseCard horse={horse} showForSaleLabel/>
-              ))}
-            </div>
-        </div>
-        <a href="/ehemalige-pferde">
-            <div class="w-fit px-8 py-4 bg-brand rounded-full font-semibold text-white text-lg">
-                Zu den ehemaligen Pferden
-            </div>
-        </a>
+  <div class="page-width mx-auto space-y-12 px-4">
+    <div class="space-y-4 text-2xl">
+      <h1>Alle Pferde</h1>
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {activeHorses.map((horse) => <HorseCard horse={horse} showForSaleLabel />)}
+      </div>
     </div>
+    <a href="/ehemalige-pferde">
+      <div class="bg-brand w-fit rounded-full px-8 py-4 text-lg font-semibold text-white">Zu den ehemaligen Pferden</div>
+    </a>
+  </div>
 </Layout>

@@ -1,70 +1,77 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from "astro:assets"
 
-const { images, firstPhotoCropPosition } = Astro.props;
+interface GalleryImage {
+  src: string
+  width: number
+  height: number
+  format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif"
+  featured?: boolean
+}
 
-let cropPosition = ''
+interface Props {
+  images?: GalleryImage[] | null
+  firstPhotoCropPosition?: string | null
+}
+
+const { images, firstPhotoCropPosition } = Astro.props
+
+let cropPosition = ""
 switch (firstPhotoCropPosition) {
   case "top-left":
-    cropPosition = 'first:object-top-left'
-    break;
+    cropPosition = "first:object-top-left"
+    break
   case "top":
-    cropPosition = 'first:object-top'
-    break;
+    cropPosition = "first:object-top"
+    break
   case "top-right":
-    cropPosition = 'first:object-top-right'
-    break;
+    cropPosition = "first:object-top-right"
+    break
   case "left":
-    cropPosition = 'first:object-left'
-    break;
+    cropPosition = "first:object-left"
+    break
   case "right":
-    cropPosition = 'first:object-right'
-    break;
+    cropPosition = "first:object-right"
+    break
   case "bottom-left":
-    cropPosition = 'first:object-bottom-left'
-    break;
+    cropPosition = "first:object-bottom-left"
+    break
   case "bottom":
-    cropPosition = 'first:object-bottom'
-    break;
+    cropPosition = "first:object-bottom"
+    break
   case "bottom-right":
-    cropPosition = 'first:object-bottom-right'
-    break;
+    cropPosition = "first:object-bottom-right"
+    break
   case "center":
   default:
-    cropPosition = 'first:object-center'
-    break;
+    cropPosition = "first:object-center"
+    break
 }
 ---
-<div class="pswp-gallery pswp-gallery--single-column grid grid-cols-2 lg:grid-cols-4 gap-1" id="gallery">
-  {images?.map((image, i) => (
-    <a
-      href={image.src}
-      class={`h-full w-full cursor-pointer hover:brightness-110 relative ${image.featured && 'row-span-2 col-span-2'}`}
-      data-pswp-width={image.width}
-      data-pswp-height={image.height}
-      data-cropped="true"
-      target="_blank"
-      tabindex={i < 5 ? '0' : '-1'}
-    >
-      {i === 4 && images.length > 5 && (
-        <div class="absolute inset-0 bg-black/50 backdrop-blur rounded flex justify-center items-center text-white">
-          {images.length - 4} weitere Bilder
-        </div>
-      )}
-      {i < 5 && (
-        <Image
-          src={image}
-          alt={image.src}
-          loading="eager"
-          class={`rounded aspect-square object-cover ${cropPosition}`}
-        />
-      )}
-    </a>
-  ))}
+
+<div class="pswp-gallery pswp-gallery--single-column grid grid-cols-2 gap-1 lg:grid-cols-4" id="gallery">
+  {
+    images?.map((image, i) => (
+      <a
+        href={image.src}
+        class={`relative h-full w-full cursor-pointer hover:brightness-110 ${image.featured && "col-span-2 row-span-2"}`}
+        data-pswp-width={image.width}
+        data-pswp-height={image.height}
+        data-cropped="true"
+        target="_blank"
+        tabindex={i < 5 ? "0" : "-1"}
+      >
+        {i === 4 && images.length > 5 && (
+          <div class="absolute inset-0 flex items-center justify-center rounded bg-black/50 text-white backdrop-blur">{images.length - 4} weitere Bilder</div>
+        )}
+        {i < 5 && <Image src={image} alt={image.src} loading="eager" class={`aspect-square rounded object-cover ${cropPosition}`} />}
+      </a>
+    ))
+  }
 </div>
 <script>
-  import PhotoSwipeLightbox from "photoswipe/lightbox";
-  import "photoswipe/style.css";
+  import PhotoSwipeLightbox from "photoswipe/lightbox"
+  import "photoswipe/style.css"
 
   const lightbox = new PhotoSwipeLightbox({
     gallery: "#gallery",
@@ -72,15 +79,15 @@ switch (firstPhotoCropPosition) {
 
     mouseMovePan: true,
 
-    initialZoomLevel: 'fit',
+    initialZoomLevel: "fit",
     secondaryZoomLevel: 1.5,
     maxZoomLevel: 1,
 
-    tapAction: 'next',
-    bgClickAction: 'close',
+    tapAction: "next",
+    bgClickAction: "close",
     doubleTapAction: false,
 
-    pswpModule: () => import("photoswipe")
-  });
-  lightbox.init();
+    pswpModule: () => import("photoswipe"),
+  })
+  lightbox.init()
 </script>

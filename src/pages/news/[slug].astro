@@ -1,48 +1,40 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import Image from "astro/components/Image.astro";
-import MiniHorseCard from "../../components/horses/MiniHorseCard.astro";
-import PhotoSwipe from "../../components/PhotoSwipe.astro";
+import { getCollection, getEntry, render, type CollectionEntry } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import Image from "astro/components/Image.astro"
+import MiniHorseCard from "../../components/horses/MiniHorseCard.astro"
+import PhotoSwipe from "../../components/PhotoSwipe.astro"
 
-const { slug } = Astro.params;
-if (!slug) throw new Error("Slug not found");
-const article = await getEntry("articles", slug);
-if (!article) throw new Error("No article found for this slug");
+const { slug } = Astro.params
+if (!slug) throw new Error("Slug not found")
+const article = await getEntry("articles", slug)
+if (!article) throw new Error("No article found for this slug")
 
-const { Content } = await render(article);
+const { Content } = await render(article)
 
-const horses = await getCollection("horses");
-if (article.data.horses?.length) {
-  article.data.horsesData = [];
-  article.data.horses.forEach((horseSlug, i) => {
-    article.data.horsesData[i] = horses.find(h => h.id === horseSlug);
-  });
-}
+const horses = await getCollection("horses")
+const horsesData = (article.data.horses ?? [])
+  .map((horseSlug) => horses.find((h) => h.id === horseSlug))
+  .filter((horse): horse is CollectionEntry<"horses"> => horse !== undefined)
 
 // Generate static pages
 export async function getStaticPaths() {
-  const articles = await getCollection("articles");
-  return articles.map(article => ({ params: { slug: article.id } }));
+  const articles = await getCollection("articles")
+  return articles.map((article) => ({ params: { slug: article.id } }))
 }
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("de-AT", {
     year: "numeric",
     month: "long",
-    day: "numeric"
-  }).format(date);
+    day: "numeric",
+  }).format(date)
 }
 ---
+
 <Layout title={article.data.title} image={article.data.cover_image.src}>
   <div class="page-width mx-auto space-y-16">
-    <Image
-      src={article.data.cover_image}
-      alt={`${slug}`}
-      width={0}
-      class="aspect-2/1 object-cover md:rounded-xl w-full max-w-[1000px] mx-auto"
-      loading="eager"
-    />
+    <Image src={article.data.cover_image} alt={`${slug}`} width={0} class="mx-auto aspect-2/1 w-full max-w-250 object-cover md:rounded-xl" loading="eager" />
     <div class="space-y-16 px-4 md:px-0">
       <div class="prose-lg">
         <time datetime={article.data.created_at.toISOString()} class="text-sm text-gray-500">
@@ -52,18 +44,18 @@ function formatDate(date: Date) {
         <Content />
       </div>
       <PhotoSwipe images={article.data.gallery} />
-      {article.data?.horses?.length > 0 && (
-        <div class="space-y-4">
-          <h2>
-            In diesem Artikel erwähnte Pferde
-          </h2>
-          <div class="grid md:grid-cols-4 grid-cols-2 gap-4">
-            {article.data.horsesData?.map(horse => (
-              <MiniHorseCard horseSlug={horse.id} />
-            ))}
+      {
+        horsesData.length > 0 && (
+          <div class="space-y-4">
+            <h2>In diesem Artikel erwähnte Pferde</h2>
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {horsesData.map((horse) => (
+                <MiniHorseCard horseSlug={horse.id} />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </div>
   </div>
 </Layout>

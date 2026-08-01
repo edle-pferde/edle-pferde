@@ -1,36 +1,29 @@
 ---
-import { getCollection } from "astro:content";
-import NewsArticleBig from "./homepage/news/NewsArticleBig.astro";
-import NewsArticleSmall from "./homepage/news/NewsArticleSmall.astro";
+import { getCollection } from "astro:content"
+import NewsArticleBig from "./homepage/news/NewsArticleBig.astro"
+import NewsArticleSmall from "./homepage/news/NewsArticleSmall.astro"
 
-let articles = await getCollection("articles");
-articles = articles.sort((a, b) => (a.data.created_at < b.data.created_at) ? 1 : ((b.data.created_at < a.data.created_at) ? -1 : 0));
+let articles = await getCollection("articles")
+articles = articles.sort((a, b) => (a.data.created_at < b.data.created_at ? 1 : b.data.created_at < a.data.created_at ? -1 : 0))
 ---
+
 <div class="page-width mx-auto px-8 md:px-0">
   <div class="flex flex-col items-center justify-center space-y-8">
     <div class="flex flex-col items-center space-y-4">
-      <div class="font-normal text-brand text-3xl text-center">
-        News
-      </div>
-      <div class="font-bold text-brand text-sm tracking-widest text-center uppercase">
-        Neues aus Pichl
-      </div>
-      <div class="bg-primary-600 w-20 h-1"></div>
+      <div class="text-brand text-center text-3xl font-normal">News</div>
+      <div class="text-brand text-center text-sm font-bold tracking-widest uppercase">Neues aus Pichl</div>
+      <div class="bg-primary-600 h-1 w-20"></div>
     </div>
     <div class="relative">
-      <div class="absolute invisible md:visible bg-white shadow-2xl border border-gray-200 rounded-2xl inset-x-0 bottom-0 top-64"></div>
-      <div class="grid grid-rows-5 md:grid-rows-6 grid-cols-4 gap-4 w-full md:px-8">
+      <div class="invisible absolute inset-x-0 top-64 bottom-0 rounded-2xl border border-gray-200 bg-white shadow-2xl md:visible"></div>
+      <div class="grid w-full grid-cols-4 grid-rows-5 gap-4 md:grid-rows-6 md:px-8">
         <NewsArticleBig article={articles[0]} />
-        {articles.slice(1, 5).map(article => (
-          <NewsArticleSmall article={article} />
-        ))}
+        {articles.slice(1, 5).map((article) => <NewsArticleSmall article={article} />)}
       </div>
 
-      <div class="flex items-center justify-center relative py-8">
+      <div class="relative flex items-center justify-center py-8">
         <a href="/news" class="row-span col-span-4">
-          <div class="w-fit px-8 py-4 bg-brand rounded-full font-semibold text-white text-sm">
-            MEHR LESEN
-          </div>
+          <div class="bg-brand w-fit rounded-full px-8 py-4 text-sm font-semibold text-white">MEHR LESEN</div>
         </a>
       </div>
     </div>

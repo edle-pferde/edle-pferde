@@ -1,48 +1,29 @@
 ---
-import Image from 'astro/components/Image.astro'
+import Image from "astro/components/Image.astro"
 ---
+
 <div class="page-width mx-auto px-4 md:px-0">
-  <div class="flex lg:flex-row flex-col items-center">
-    <div class="flex -space-x-48 md:-space-x-40 md:mx-20 mb-16">
+  <div class="flex flex-col items-center lg:flex-row">
+    <div class="mb-16 flex -space-x-48 md:mx-20 md:-space-x-40">
       <div>
-        <Image
-          class="size-[300px] object-cover rounded-xl shadow-2xl -rotate-6"
-          width={500}
-          height={500}
-          alt="Gestuet"
-          src="/Gestuet1_0.jpg"
-          loading="eager"
-        />
+        <Image class="size-75 -rotate-6 rounded-xl object-cover shadow-2xl" width={500} height={500} alt="Gestuet" src="/Gestuet1_0.jpg" loading="eager" />
       </div>
       <div class="pt-48">
-        <Image
-          class="size-[300px] object-cover rounded-xl shadow-2xl rotate-6"
-          width={300}
-          height={300}
-          alt="Gestuet"
-          src="/LQKL0944_0.jpg"
-          loading="eager"
-        />
+        <Image class="size-75 rotate-6 rounded-xl object-cover shadow-2xl" width={300} height={300} alt="Gestuet" src="/LQKL0944_0.jpg" loading="eager" />
       </div>
     </div>
-    <div class="space-y-8 flex-1 px-8 lg:px-0">
+    <div class="flex-1 space-y-8 px-8 lg:px-0">
       <div class="space-y-2">
-        <div class="text-brand font-semibold text-2xl">Über uns</div>
+        <div class="text-brand text-2xl font-semibold">Über uns</div>
         <div class="text-brand">Eine 30-jährige Geschichte</div>
       </div>
-      <div class="bg-primary-600 w-20 h-1"></div>
-      <p class="font-normal text-brand text-sm lg:text-balance">
-        Herzlich willkommen am Trakehner Gestüt Pichl in
-        Oberösterreich! Unser Hof liegt im Herzen des
-        Hausruckviertels, 30 Kilometer von der Grenze zu Bayern
-        entfernt. Seit 2006 bestreben wir mit unserer kleinen, aber
-        feinen Trakehnerzucht, perfekte Partner für Sport und Freizeit
-        zu züchten.
+      <div class="bg-primary-600 h-1 w-20"></div>
+      <p class="text-brand text-sm font-normal lg:text-balance">
+        Herzlich willkommen am Trakehner Gestüt Pichl in Oberösterreich! Unser Hof liegt im Herzen des Hausruckviertels, 30 Kilometer von der Grenze zu Bayern
+        entfernt. Seit 2006 bestreben wir mit unserer kleinen, aber feinen Trakehnerzucht, perfekte Partner für Sport und Freizeit zu züchten.
       </p>
       <a href="/ueber-uns">
-      <div class="w-fit px-8 py-4 bg-brand rounded-full font-semibold text-white text-sm">
-        MEHR ERFAHREN
-      </div>
+        <div class="bg-brand w-fit rounded-full px-8 py-4 text-sm font-semibold text-white">MEHR ERFAHREN</div>
       </a>
     </div>
   </div>

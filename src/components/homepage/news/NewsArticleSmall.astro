@@ -1,41 +1,42 @@
 ---
-import Image from 'astro/components/Image.astro'
+import Image from "astro/components/Image.astro"
 const { article } = Astro.props
 
-let cropPosition = "";
+let cropPosition = ""
 switch (article.data.cover_image_crop_position) {
   case "top-left":
-    cropPosition = "object-top-left";
-    break;
+    cropPosition = "object-top-left"
+    break
   case "top":
-    cropPosition = "object-top";
-    break;
+    cropPosition = "object-top"
+    break
   case "top-right":
-    cropPosition = "object-top-right";
-    break;
+    cropPosition = "object-top-right"
+    break
   case "left":
-    cropPosition = "object-left";
-    break;
+    cropPosition = "object-left"
+    break
   case "right":
-    cropPosition = "object-right";
-    break;
+    cropPosition = "object-right"
+    break
   case "bottom-left":
-    cropPosition = "object-bottom-left";
-    break;
+    cropPosition = "object-bottom-left"
+    break
   case "bottom":
-    cropPosition = "object-bottom";
-    break;
+    cropPosition = "object-bottom"
+    break
   case "bottom-right":
-    cropPosition = "object-bottom-right";
-    break;
+    cropPosition = "object-bottom-right"
+    break
   case "center":
   default:
-    cropPosition = "object-center";
-    break;
+    cropPosition = "object-center"
+    break
 }
 ---
-<a href={`/news/${article.id}`} class="md:row-span-2 col-span-4 md:col-span-2 lg:col-span-1">
-  <div class="relative md:h-full w-full aspect-3/2">
+
+<a href={`/news/${article.id}`} class="col-span-4 md:col-span-2 md:row-span-2 lg:col-span-1">
+  <div class="relative aspect-3/2 w-full md:h-full">
     <Image
       src={article.data.cover_image}
       alt={`${article.id}`}
@@ -45,9 +46,11 @@ switch (article.data.cover_image_crop_position) {
       class={`object-cover z-10 rounded-lg w-full h-full ${cropPosition}`}
       transition:name={`article-${article.id}`}
     />
-    <div class="absolute inset-0 bg-gradient-to-t from from-black to-50%  z-20 rounded-b-lg" />
-    <div class="absolute bottom-4 inset-x-4 text-white z-20">
-      <div class="font-semibold line-clamp-3 md:text-balance text-xl md:text-base">{article.data.title}</div>
+    <div class="absolute inset-0 z-20 rounded-b-lg bg-linear-to-t from-black to-50%"></div>
+    <div class="absolute inset-x-4 bottom-4 z-20 text-white">
+      <div class="line-clamp-3 text-xl font-semibold md:text-base md:text-balance">
+        {article.data.title}
+      </div>
     </div>
   </div>
 </a>

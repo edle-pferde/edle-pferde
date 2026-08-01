@@ -1,49 +1,50 @@
 ---
-import Image from "astro/components/Image.astro";
-const { article } = Astro.props;
+import Image from "astro/components/Image.astro"
+const { article } = Astro.props
 
-let cropPosition = "";
+let cropPosition = ""
 switch (article.data.cover_image_crop_position) {
   case "top-left":
-    cropPosition = "object-top-left";
-    break;
+    cropPosition = "object-top-left"
+    break
   case "top":
-    cropPosition = "object-top";
-    break;
+    cropPosition = "object-top"
+    break
   case "top-right":
-    cropPosition = "object-top-right";
-    break;
+    cropPosition = "object-top-right"
+    break
   case "left":
-    cropPosition = "object-left";
-    break;
+    cropPosition = "object-left"
+    break
   case "right":
-    cropPosition = "object-right";
-    break;
+    cropPosition = "object-right"
+    break
   case "bottom-left":
-    cropPosition = "object-bottom-left";
-    break;
+    cropPosition = "object-bottom-left"
+    break
   case "bottom":
-    cropPosition = "object-bottom";
-    break;
+    cropPosition = "object-bottom"
+    break
   case "bottom-right":
-    cropPosition = "object-bottom-right";
-    break;
+    cropPosition = "object-bottom-right"
+    break
   case "center":
   default:
-    cropPosition = "object-center";
-    break;
+    cropPosition = "object-center"
+    break
 }
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("de-AT", {
     year: "numeric",
     month: "long",
-    day: "numeric"
-  }).format(date);
+    day: "numeric",
+  }).format(date)
 }
 ---
+
 <a href={`/news/${article.id}`} class="box transition hover:brightness-110">
-  <div class="flex flex-col md:flex-row rounded bg-white overflow-auto shadow">
+  <div class="flex flex-col overflow-auto rounded bg-white shadow md:flex-row">
     <Image
       src={article.data.cover_image}
       alt={`${article.id}`}
@@ -53,12 +54,14 @@ function formatDate(date: Date) {
       class={`aspect-4/3 w-full md:w-72 object-cover ${cropPosition}`}
       transition:name={`article-${article.id}`}
     />
-    <div class="px-8 py-4 flex flex-col justify-between">
+    <div class="flex flex-col justify-between px-8 py-4">
       <div class="space-y-2">
-        <div class="font-semibold text-xl line-clamp-2">{article.data.title}</div>
+        <div class="line-clamp-2 text-xl font-semibold">
+          {article.data.title}
+        </div>
         <p class="line-clamp-3">{article.body}</p>
       </div>
-      <time class="text-sm mt-4">{formatDate(new Date(article.data.created_at))}</time>
+      <time class="mt-4 text-sm">{formatDate(new Date(article.data.created_at))}</time>
     </div>
   </div>
 </a>
