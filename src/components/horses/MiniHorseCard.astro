@@ -6,44 +6,14 @@ const { horseSlug } = Astro.props
 const horse = await getEntry("horses", horseSlug)
 if (!horse) throw new Error(`Horse not found: ${horseSlug}`)
 
-let cropPosition = ""
-switch (horse.data.profile_picture_crop_position) {
-  case "top-left":
-    cropPosition = "object-top-left"
-    break
-  case "top":
-    cropPosition = "object-top"
-    break
-  case "top-right":
-    cropPosition = "object-top-right"
-    break
-  case "left":
-    cropPosition = "object-left"
-    break
-  case "right":
-    cropPosition = "object-right"
-    break
-  case "bottom-left":
-    cropPosition = "object-bottom-left"
-    break
-  case "bottom":
-    cropPosition = "object-bottom"
-    break
-  case "bottom-right":
-    cropPosition = "object-bottom-right"
-    break
-  case "center":
-  default:
-    cropPosition = "object-center"
-    break
-}
+const cropPosition = cropPositionClass(horse.data.profile_picture_crop_position)
 ---
 
 <a href={`/pferde/${horse.id}`} class="box">
   <div class="flex flex-col overflow-auto rounded bg-white shadow">
     <Image
       src={horse.data.profile_picture}
-      alt={`${horse.id}`}
+      alt={horse.data.profile_picture_alt_text || horse.data.full_name}
       width={500}
       height={500}
       loading="eager"

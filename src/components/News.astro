@@ -17,7 +17,7 @@ articles = articles.sort((a, b) => (a.data.created_at < b.data.created_at ? 1 : 
     <div class="relative">
       <div class="invisible absolute inset-x-0 top-64 bottom-0 rounded-2xl border border-gray-200 bg-white shadow-2xl md:visible"></div>
       <div class="grid w-full grid-cols-4 grid-rows-5 gap-4 md:grid-rows-6 md:px-8">
-        <NewsArticleBig article={articles[0]} />
+        {articles[0] && <NewsArticleBig article={articles[0]} />}
         {articles.slice(1, 5).map((article) => <NewsArticleSmall article={article} />)}
       </div>
 

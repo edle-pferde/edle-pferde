@@ -256,41 +256,6 @@ export default config({
     }),
   },
   singletons: {
-    homepage: singleton({
-      label: "Homepage",
-      path: "src/content/texts",
-      schema: {
-        about_text: fields.text({
-          label: "About text",
-          multiline: true,
-        }),
-        horses_headline: fields.text({
-          label: "Horses headline",
-        }),
-        horses_description: fields.text({
-          label: "Horses description",
-          multiline: true,
-        }),
-        about_headline: fields.text({
-          label: "About headline",
-        }),
-        about_description: fields.text({
-          label: "About description",
-          multiline: true,
-        }),
-        gallery_headline: fields.text({
-          label: "Gallery headline",
-        }),
-        gallery_description: fields.text({
-          label: "Gallery description",
-          multiline: true,
-        }),
-        footer: fields.text({
-          label: "Footer",
-          multiline: true,
-        }),
-      },
-    }),
     social_media: singleton({
       label: "Social media",
       path: "src/content/social_media",

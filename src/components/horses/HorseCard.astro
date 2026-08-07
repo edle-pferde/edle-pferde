@@ -3,37 +3,7 @@ import Image from "astro/components/Image.astro"
 
 const { horse, showForSaleLabel } = Astro.props
 
-let cropPosition = ""
-switch (horse.data.profile_picture_crop_position) {
-  case "top-left":
-    cropPosition = "object-top-left"
-    break
-  case "top":
-    cropPosition = "object-top"
-    break
-  case "top-right":
-    cropPosition = "object-top-right"
-    break
-  case "left":
-    cropPosition = "object-left"
-    break
-  case "right":
-    cropPosition = "object-right"
-    break
-  case "bottom-left":
-    cropPosition = "object-bottom-left"
-    break
-  case "bottom":
-    cropPosition = "object-bottom"
-    break
-  case "bottom-right":
-    cropPosition = "object-bottom-right"
-    break
-  case "center":
-  default:
-    cropPosition = "object-center"
-    break
-}
+const cropPosition = cropPositionClass(horse.data.profile_picture_crop_position)
 ---
 
 <a href={`/pferde/${horse.id}`} class="box">
@@ -43,7 +13,13 @@ switch (horse.data.profile_picture_crop_position) {
         <div class="from-brand-light to-brand absolute m-3 rounded bg-linear-to-b px-3 py-1 text-base font-semibold text-white shadow-lg">Verkäuflich</div>
       )
     }
-    <Image src={horse.data.profile_picture} alt={`${horse.id}`} width={800} class={`w-full object-cover aspect-square ${cropPosition}`} loading="eager" />
+    <Image
+      src={horse.data.profile_picture}
+      alt={horse.data.profile_picture_alt_text || horse.data.full_name}
+      width={800}
+      class={`w-full object-cover aspect-square ${cropPosition}`}
+      loading="eager"
+    />
     <div class="p-6">
       <div class="flex space-x-4 text-sm text-gray-500">
         {horse.data.birth_year}, {horse.data.breed}
@@ -51,9 +27,13 @@ switch (horse.data.profile_picture_crop_position) {
       <div class="text-brand mb-2 line-clamp-1 text-2xl font-semibold">
         {horse.data.full_name}
       </div>
-      <div class="line-clamp-1 text-sm text-gray-500">
-        {horse.data.father.value} – {horse.data.mothers_father.value}
-      </div>
+      {
+        horse.data.father?.value && horse.data.mothers_father?.value && (
+          <div class="line-clamp-1 text-sm text-gray-500">
+            {horse.data.father.value} – {horse.data.mothers_father.value}
+          </div>
+        )
+      }
     </div>
   </div>
 </a>

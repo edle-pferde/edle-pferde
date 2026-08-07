@@ -34,7 +34,7 @@ function formatDate(date: Date) {
 
 <Layout title={article.data.title} image={article.data.cover_image.src}>
   <div class="page-width mx-auto space-y-16">
-    <Image src={article.data.cover_image} alt={`${slug}`} width={0} class="mx-auto aspect-2/1 w-full max-w-250 object-cover md:rounded-xl" loading="eager" />
+    <Image src={article.data.cover_image} alt={article.data.title} width={0} class="mx-auto aspect-2/1 w-full max-w-250 object-cover md:rounded-xl" loading="eager" />
     <div class="space-y-16 px-4 md:px-0">
       <div class="prose-lg">
         <time datetime={article.data.created_at.toISOString()} class="text-sm text-gray-500">

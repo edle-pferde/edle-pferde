@@ -2,7 +2,12 @@
 const { height, width } = Astro.props
 ---
 
-<svg viewBox="0 0 352 270" fill="none" xmlns="http://www.w3.org/2000/svg" style={`width:${width}px`}>
+<svg
+  viewBox="0 0 352 270"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style={`width:${width ? `${width}px` : "100%"};height:${height ? `${height}px` : "auto"}`}
+>
   <title>Trakehner Gestüt Pichl Logo</title>
   <g clip-path="url(#clip0_2063_107)">
     <path

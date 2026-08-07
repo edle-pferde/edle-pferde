@@ -6,6 +6,8 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const imageImporter: typeof import('./src/composables/imageImporter')['default']
+  const cropPositionClass: typeof import('./src/composables/cropPosition').cropPositionClass
+  const firstCropPositionClass: typeof import('./src/composables/cropPosition').firstCropPositionClass
   const reader: typeof import('./src/composables/reader').reader
+  const stripMarkdown: typeof import('./src/composables/markdown').stripMarkdown
 }

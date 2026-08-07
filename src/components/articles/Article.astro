@@ -2,37 +2,7 @@
 import Image from "astro/components/Image.astro"
 const { article } = Astro.props
 
-let cropPosition = ""
-switch (article.data.cover_image_crop_position) {
-  case "top-left":
-    cropPosition = "object-top-left"
-    break
-  case "top":
-    cropPosition = "object-top"
-    break
-  case "top-right":
-    cropPosition = "object-top-right"
-    break
-  case "left":
-    cropPosition = "object-left"
-    break
-  case "right":
-    cropPosition = "object-right"
-    break
-  case "bottom-left":
-    cropPosition = "object-bottom-left"
-    break
-  case "bottom":
-    cropPosition = "object-bottom"
-    break
-  case "bottom-right":
-    cropPosition = "object-bottom-right"
-    break
-  case "center":
-  default:
-    cropPosition = "object-center"
-    break
-}
+const cropPosition = cropPositionClass(article.data.cover_image_crop_position)
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("de-AT", {
@@ -47,7 +17,7 @@ function formatDate(date: Date) {
   <div class="flex flex-col overflow-auto rounded bg-white shadow md:flex-row">
     <Image
       src={article.data.cover_image}
-      alt={`${article.id}`}
+      alt={article.data.title}
       height={768}
       width={1024}
       loading="eager"
@@ -59,7 +29,7 @@ function formatDate(date: Date) {
         <div class="line-clamp-2 text-xl font-semibold">
           {article.data.title}
         </div>
-        <p class="line-clamp-3">{article.body}</p>
+        <p class="line-clamp-3">{stripMarkdown(article.body)}</p>
       </div>
       <time class="mt-4 text-sm">{formatDate(new Date(article.data.created_at))}</time>
     </div>

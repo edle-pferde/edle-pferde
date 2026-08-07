@@ -7,6 +7,7 @@ interface GalleryImage {
   height: number
   format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif"
   featured?: boolean
+  alt?: string
 }
 
 interface Props {
@@ -16,37 +17,7 @@ interface Props {
 
 const { images, firstPhotoCropPosition } = Astro.props
 
-let cropPosition = ""
-switch (firstPhotoCropPosition) {
-  case "top-left":
-    cropPosition = "first:object-top-left"
-    break
-  case "top":
-    cropPosition = "first:object-top"
-    break
-  case "top-right":
-    cropPosition = "first:object-top-right"
-    break
-  case "left":
-    cropPosition = "first:object-left"
-    break
-  case "right":
-    cropPosition = "first:object-right"
-    break
-  case "bottom-left":
-    cropPosition = "first:object-bottom-left"
-    break
-  case "bottom":
-    cropPosition = "first:object-bottom"
-    break
-  case "bottom-right":
-    cropPosition = "first:object-bottom-right"
-    break
-  case "center":
-  default:
-    cropPosition = "first:object-center"
-    break
-}
+const cropPosition = firstCropPositionClass(firstPhotoCropPosition)
 ---
 
 <div class="pswp-gallery pswp-gallery--single-column grid grid-cols-2 gap-1 lg:grid-cols-4" id="gallery">
@@ -54,7 +25,7 @@ switch (firstPhotoCropPosition) {
     images?.map((image, i) => (
       <a
         href={image.src}
-        class={`relative h-full w-full cursor-pointer hover:brightness-110 ${image.featured && "col-span-2 row-span-2"}`}
+        class={`relative h-full w-full cursor-pointer hover:brightness-110 ${image.featured ? "col-span-2 row-span-2" : ""}`}
         data-pswp-width={image.width}
         data-pswp-height={image.height}
         data-cropped="true"
@@ -64,7 +35,7 @@ switch (firstPhotoCropPosition) {
         {i === 4 && images.length > 5 && (
           <div class="absolute inset-0 flex items-center justify-center rounded bg-black/50 text-white backdrop-blur">{images.length - 4} weitere Bilder</div>
         )}
-        {i < 5 && <Image src={image} alt={image.src} loading="eager" class={`aspect-square rounded object-cover ${cropPosition}`} />}
+        {i < 5 && <Image src={image} alt={image.alt ?? ""} loading="eager" class={`aspect-square rounded object-cover ${cropPosition}`} />}
       </a>
     ))
   }

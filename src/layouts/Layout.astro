@@ -10,6 +10,9 @@ export interface Props {
 }
 
 const { title, image } = Astro.props
+const site = Astro.site ?? new URL("https://edle-pferde.com")
+const ogImage = new URL(image || "/hero.webp", site).href
+const pageUrl = Astro.url
 ---
 
 <!doctype html>
@@ -22,12 +25,12 @@ const { title, image } = Astro.props
       content="Trakehner, Pferdezucht, Gestüt, Trakehner Gestüt, Pichl, Oberösterreich, Pramendorfer, Pferde, Verkaufspferde, Sportpferde, Reitpferde"
     />
     <meta name="author" content="Familie Pramendorfer" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich" />
-    <meta property="og:image" content={image || "https://edle-pferde.com/hero.webp"} />
-    <meta property="og:url" content="https://edle-pferde.com/" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={pageUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_AT" />
     <meta property="og:site_name" content="Trakehner Gestüt Pichl" />
@@ -36,10 +39,14 @@ const { title, image } = Astro.props
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content="4716 Hofkirchen an der Trattnach, Oberösterreich" />
-    <meta name="twitter:image" content={image || "https://edle-pferde.com/hero.webp"} />
+    <meta name="twitter:image" content={ogImage} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="icon" href="/favicon_dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={pageUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body class="bg-primary-50">

@@ -7,7 +7,7 @@ const { article } = Astro.props
   <div class="relative aspect-3/2 lg:aspect-2/1">
     <Image
       src={article.data.cover_image}
-      alt={`${article.id}`}
+      alt={article.data.title}
       height={0}
       width={0}
       loading="eager"
@@ -19,7 +19,7 @@ const { article } = Astro.props
       <div class="line-clamp-2 text-xl font-semibold text-white md:text-3xl">
         {article.data.title}
       </div>
-      <p class="hidden text-sm text-white/75 md:line-clamp-2">{article.body}</p>
+      <p class="hidden text-sm text-white/75 md:line-clamp-2">{stripMarkdown(article.body)}</p>
     </div>
   </div>
 </a>

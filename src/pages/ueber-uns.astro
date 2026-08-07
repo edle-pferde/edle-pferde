@@ -9,11 +9,11 @@ const { Content } = await render(aboutUs)
 ---
 
 <Layout title="Über uns">
-  <main class="page-width mx-auto px-4 md:px-0">
+  <div class="page-width mx-auto px-4 md:px-0">
     <div class="prose">
       <h1>{aboutUs.data.title}</h1>
       <Content />
       <PhotoSwipeAll images={aboutUs.data.gallery} />
     </div>
-  </main>
+  </div>
 </Layout>

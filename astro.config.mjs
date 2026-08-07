@@ -26,7 +26,22 @@ export default defineConfig({
       }),
     ],
     build: {
-      chunkSizeWarningLimit: 3000,
+      rolldownOptions: {
+        output: {
+          // The Keystatic admin UI (only loaded on /keystatic) would otherwise be
+          // bundled into a single ~2.8 MB chunk. Split it into smaller pieces so
+          // every chunk stays under Vite's 500 kB warning threshold.
+          codeSplitting: {
+            groups: [
+              {
+                name: "keystatic",
+                test: /node_modules\/(@keystatic|@keystar)\//,
+                maxSize: 490 * 1024,
+              },
+            ],
+          },
+        },
+      },
     },
   },
 

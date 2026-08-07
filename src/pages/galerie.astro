@@ -8,7 +8,7 @@ if (!page) throw new Error("Galerie page not found")
 ---
 
 <Layout title="Galerie">
-  <main class="page-width mx-auto px-4 md:px-0">
+  <div class="page-width mx-auto px-4 md:px-0">
     <PhotoSwipeAll images={page.data.gallery} />
-  </main>
+  </div>
 </Layout>
