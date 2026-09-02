@@ -13,7 +13,13 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://edle-pferde.com',
+  site: "https://edle-pferde.com",
+  security: {
+    allowedDomains: [
+      { hostname: "edle-pferde.com" },
+      { hostname: "www.edle-pferde.com" },
+    ],
+  },
   integrations: [react(), markdoc(), keystatic(), mdx(), sitemap()],
 
   vite: {
@@ -21,8 +27,8 @@ export default defineConfig({
       tailwindcss(),
       yaml(),
       AutoImport({
-        dirs: ['./src/composables'],
-        dts: './auto-imports.d.ts',
+        dirs: ["./src/composables"],
+        dts: "./auto-imports.d.ts",
       }),
     ],
   },
