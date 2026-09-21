@@ -34,16 +34,16 @@ switch (article.data.cover_image_crop_position) {
     break;
 }
 ---
-<a href={`/news/${article.slug}`} class="md:row-span-2 col-span-4 md:col-span-2 lg:col-span-1">
+<a href={`/news/${article.id}`} class="md:row-span-2 col-span-4 md:col-span-2 lg:col-span-1">
   <div class="relative md:h-full w-full aspect-3/2">
     <Image
       src={article.data.cover_image}
-      alt={`${article.slug}`}
+      alt={`${article.id}`}
       height={0}
       width={0}
       loading="eager"
       class={`object-cover z-10 rounded-lg w-full h-full ${cropPosition}`}
-      transition:name={`article-${article.slug}`}
+      transition:name={`article-${article.id}`}
     />
     <div class="absolute inset-0 bg-gradient-to-t from from-black to-50%  z-20 rounded-b-lg" />
     <div class="absolute bottom-4 inset-x-4 text-white z-20">

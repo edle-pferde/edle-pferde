@@ -42,16 +42,16 @@ function formatDate(date: Date) {
   }).format(date);
 }
 ---
-<a href={`/news/${article.slug}`} class="box transition hover:brightness-110">
+<a href={`/news/${article.id}`} class="box transition hover:brightness-110">
   <div class="flex flex-col md:flex-row rounded bg-white overflow-auto shadow">
     <Image
       src={article.data.cover_image}
-      alt={`${article.slug}`}
+      alt={`${article.id}`}
       height={768}
       width={1024}
       loading="eager"
       class={`aspect-4/3 w-full md:w-72 object-cover ${cropPosition}`}
-      transition:name={`article-${article.slug}`}
+      transition:name={`article-${article.id}`}
     />
     <div class="px-8 py-4 flex flex-col justify-between">
       <div class="space-y-2">

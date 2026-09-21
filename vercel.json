@@ -1,0 +1,3 @@
+{
+  "devCommand": "NODE_ENV=development astro dev --port $PORT"
+}

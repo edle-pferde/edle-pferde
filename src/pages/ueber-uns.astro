@@ -1,10 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import {getEntry} from 'astro:content'
+import {getEntry, render} from 'astro:content'
 import PhotoSwipeAll from "../components/PhotoSwipeAll.astro";
 
 const aboutUs = await getEntry('pages', 'about-us')
-const {Content} = await aboutUs.render()
+const {Content} = await render(aboutUs)
 ---
 <Layout title="Über uns">
     <main class="page-width mx-auto px-4 md:px-0">

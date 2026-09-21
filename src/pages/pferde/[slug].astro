@@ -1,5 +1,5 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { IconCalendar, IconColorPicker, IconGenderFemale, IconGenderMale, IconHorseshoe, IconRuler } from "@tabler/icons-react";
 import YoutubeEmbedVideo from "../../components/YoutubeEmbedVideo.astro";
@@ -12,7 +12,7 @@ if (!slug) throw new Error("Slug not found");
 const horse = await getEntry("horses", slug);
 if (!horse) throw new Error("No horse found for this slug");
 
-const { Content } = await horse.render();
+const { Content } = await render(horse);
 
 const allImages = [
   { ...horse.data.profile_picture, featured: true },

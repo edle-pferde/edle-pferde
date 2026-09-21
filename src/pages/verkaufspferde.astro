@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { getCollection, getEntry } from 'astro:content'
+import { getCollection, getEntry, render } from 'astro:content'
 import HorseCard from "../components/horses/HorseCard.astro";
 
 let horses = await getCollection('horses')
@@ -8,7 +8,7 @@ horses = horses.sort((a, b) => (a.data.birth_year < b.data.birth_year) ? 1 : ((b
 const horsesForSale = horses.filter(horse => horse.data.status === 'for-sale')
 
 const verkaufspferde = await getEntry('pages', 'verkaufspferde')
-const {Content} = await verkaufspferde.render()
+const {Content} = await render(verkaufspferde)
 ---
 
 <Layout title="Verkaufspferde">

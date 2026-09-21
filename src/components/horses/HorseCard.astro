@@ -35,7 +35,7 @@ switch (horse.data.profile_picture_crop_position) {
     break;
 }
 ---
-<a href={`/pferde/${horse.slug}`} class="box">
+<a href={`/pferde/${horse.id}`} class="box">
   <div class="bg-white overflow-auto rounded shadow relative">
     {showForSaleLabel && horse.data.status === "for-sale" && (
       <div class=" bg-gradient-to-b from-brand-light to-brand absolute text-white font-semibold px-3 py-1 m-3 text-base rounded shadow-lg">
@@ -44,7 +44,7 @@ switch (horse.data.profile_picture_crop_position) {
     )}
     <Image
       src={horse.data.profile_picture}
-      alt={`${horse.slug}`}
+      alt={`${horse.id}`}
       width={800}
       class={`w-full object-cover aspect-square ${cropPosition}`}
       loading="eager"

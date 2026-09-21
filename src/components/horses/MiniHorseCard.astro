@@ -38,11 +38,11 @@ switch (horse.data.profile_picture_crop_position) {
     break;
 }
 ---
-<a href={`/pferde/${horse.slug}`} class="box">
+<a href={`/pferde/${horse.id}`} class="box">
   <div class="bg-white overflow-auto rounded shadow flex flex-col">
     <Image
       src={horse.data.profile_picture}
-      alt={`${horse.slug}`}
+      alt={`${horse.id}`}
       width={500}
       height={500}
       loading="eager"
