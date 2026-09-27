@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
 import MiniHorseCard from "../../components/horses/MiniHorseCard.astro";
 import PhotoSwipe from "../../components/PhotoSwipe.astro";
+import YoutubeEmbedVideo from "../../components/YoutubeEmbedVideo.astro";
 
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
@@ -50,6 +51,15 @@ function formatDate(date: Date) {
         </time>
         <h1>{article.data.title}</h1>
         <Content />
+      </div>
+      <div class="max-w-[640px] mx-auto">
+        {article.data.youtube_video_id && (
+          <YoutubeEmbedVideo
+            youtubeVideoId={article.data.youtube_video_id}
+            width="100%"
+            height="360"
+          />
+        )}
       </div>
       <PhotoSwipe images={article.data.gallery} />
       {article.data?.horses?.length > 0 && (
