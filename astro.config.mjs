@@ -14,6 +14,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: "https://edle-pferde.com",
+  trailingSlash: "never",
   security: {
     allowedDomains: [
       { hostname: "edle-pferde.com" },
