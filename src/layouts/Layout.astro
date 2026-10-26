@@ -15,7 +15,6 @@ const DEFAULT_DESCRIPTION = "Familiäre Trakehnerzucht im Hausruckviertel, Ober�
 
 const { title, description = DEFAULT_DESCRIPTION, image = "/hero.webp" } = Astro.props;
 
-const fullTitle = `${title} – ${SITE_NAME}`;
 const imageUrl = new URL(image, Astro.site).href;
 const isNotFound = Astro.url.pathname.startsWith("/404");
 const canonicalUrl = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.site).href;
@@ -23,14 +22,14 @@ const canonicalUrl = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.s
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <title>{fullTitle}</title>
+    <title>{title}</title>
     <meta name="description" content={description}>
     <meta name="keywords" content="Trakehner, Pferdezucht, Gestüt, Trakehner Gestüt, Pichl, Oberösterreich, Pramendorfer, Pferde, Verkaufspferde, Sportpferde, Reitpferde">
     <meta name="author" content="Familie Pramendorfer">
     <meta name="viewport" content="width=device-width" />
     {!isNotFound && <link rel="canonical" href={canonicalUrl} />}
 
-    <meta property="og:title" content={fullTitle}>
+    <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:image" content={imageUrl}>
     {!isNotFound && <meta property="og:url" content={canonicalUrl}>}
@@ -40,7 +39,7 @@ const canonicalUrl = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.s
     <meta property="og:logo" content="https://edle-pferde.com/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content={fullTitle}>
+    <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content={imageUrl}>
 
