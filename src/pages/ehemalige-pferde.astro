@@ -8,7 +8,10 @@ horses = horses.sort((a, b) => (a.data.in_stable_until < b.data.in_stable_until)
 const inactiveHorses = horses.filter(horse => horse.data.status === 'inactive')
 ---
 
-<Layout title="Ehemalige Pferde">
+<Layout
+  title="Ehemalige Pferde"
+  description="Pferde, die Teil unseres Gestüts waren: verkaufte Trakehner, Nachzucht in neuen Händen und unvergessene Weggefährten, mit Abstammung und Erfolgen."
+>
     <div class="page-width mx-auto px-4 md:px-0 space-y-24">
         <div class="space-y-4 text-2xl">
             <h1>Ehemalige Pferde</h1>

@@ -5,7 +5,10 @@ import {getEntry, render} from 'astro:content'
 const impressum = await getEntry('pages', 'impressum')
 const {Content} = await render(impressum)
 ---
-<Layout title="Impressum">
+<Layout
+  title="Impressum"
+  description="Impressum und Kontaktangaben des Trakehner Gestüts Pichl in Hofkirchen an der Trattnach, Oberösterreich."
+>
     <main class="page-width mx-auto px-4 md:px-0">
         <div class="prose">
             <h1>{impressum.data.title}</h1>
