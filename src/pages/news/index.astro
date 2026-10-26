@@ -8,10 +8,11 @@ articles = articles.sort((a, b) => (a.data.created_at < b.data.created_at) ? 1 :
 ---
 
 <Layout
-  title="News vom Trakehner Gestüt Pichl"
+  title="News aus dem Gestüt"
   description="Neuigkeiten vom Trakehner Gestüt Pichl: Fohlengeburten, Turniererfolge, Musterungen, Prämierungen und Alltag auf unserem Hof im Hausruckviertel."
 >
     <div class="page-width mx-auto flex flex-col space-y-8 px-4 md:px-0">
+      <h1 class="sr-only">News aus dem Gestüt</h1>
       {articles.map(article => (
               <Article article={article}/>
       ))}
