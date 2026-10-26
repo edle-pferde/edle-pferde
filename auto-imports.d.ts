@@ -10,4 +10,5 @@ export {}
 declare global {
   const imageImporter: typeof import('./src/composables/imageImporter')['default']
   const reader: typeof import('./src/composables/reader').reader
+  const toExcerpt: typeof import('./src/composables/excerpt').toExcerpt
 }

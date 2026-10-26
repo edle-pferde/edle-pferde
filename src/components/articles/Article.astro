@@ -56,7 +56,7 @@ function formatDate(date: Date) {
     <div class="px-8 py-4 flex flex-col justify-between">
       <div class="space-y-2">
         <div class="font-semibold text-xl line-clamp-2">{article.data.title}</div>
-        <p class="line-clamp-3">{article.body}</p>
+        <p class="line-clamp-3">{toExcerpt(article.body, 300)}</p>
       </div>
       <time class="text-sm mt-4">{formatDate(new Date(article.data.created_at))}</time>
     </div>

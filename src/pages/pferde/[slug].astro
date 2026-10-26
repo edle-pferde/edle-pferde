@@ -14,6 +14,23 @@ if (!horse) throw new Error("No horse found for this slug");
 
 const { Content } = await render(horse);
 
+const pageTitle = `${horse.data.full_name} – ${horse.data.breed} ${horse.data.gender}, Jg. ${horse.data.birth_year}`;
+
+async function horseName(relation?: { value?: string | null } | null) {
+  if (!relation?.value) return undefined;
+  const entry = await getEntry("horses", relation.value);
+  return entry?.data.full_name ?? relation.value;
+}
+
+let description = toExcerpt(horse.data.bio);
+if (description.length < 80) {
+  const father = await horseName(horse.data.father);
+  const mother = await horseName(horse.data.mother);
+  const pedigree = father && mother ? ` v. ${father} a.d. ${mother}` : "";
+  const facts = `${horse.data.full_name}: ${horse.data.breed} ${horse.data.gender} (${horse.data.color}), geboren ${horse.data.birth_year}${pedigree}.`;
+  description = toExcerpt(`${facts} ${horse.data.bio ?? ""}`);
+}
+
 const allImages = [
   { ...horse.data.profile_picture, featured: true },
   ...horse.data.gallery
@@ -35,7 +52,7 @@ export async function getStaticPaths() {
   return horses.map(horse => ({ params: { slug: horse.slug } }));
 }
 ---
-<Layout title={horse.data.full_name} image={horse.data.profile_picture.src}>
+<Layout title={pageTitle} description={description} image={horse.data.profile_picture.src}>
   <div class="page-width mx-auto space-y-16 px-4 md:px-0">
     <div class="space-y-4">
       <div class="space-y-1">
