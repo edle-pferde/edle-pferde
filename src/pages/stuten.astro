@@ -19,8 +19,8 @@ const {Content} = await render(stuten)
         <div class="space-y-4 text-2xl">
             <h1>Stuten</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {mares.map(horse => (
-                      <HorseCard horse={horse} showForSaleLabel/>
+              {mares.map((horse, i) => (
+                      <HorseCard horse={horse} priority={i === 0} showForSaleLabel/>
               ))}
             </div>
         </div>

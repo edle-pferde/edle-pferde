@@ -1,7 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 
-const { horse, showForSaleLabel } = Astro.props;
+const { horse, showForSaleLabel, priority = false } = Astro.props;
 
 let cropPosition = "";
 switch (horse.data.profile_picture_crop_position) {
@@ -47,7 +47,8 @@ switch (horse.data.profile_picture_crop_position) {
       alt={horseImageAlt(horse.data)}
       width={800}
       class={`w-full object-cover aspect-square ${cropPosition}`}
-      loading="eager"
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : "auto"}
     />
     <div class="p-6">
       <div class="flex space-x-4 text-gray-500 text-sm">{horse.data.birth_year}, {horse.data.breed}</div>

@@ -19,8 +19,8 @@ const {Content} = await render(verkaufspferde)
         <div class="space-y-4 text-2xl">
             <h1>Verkaufspferde</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {horsesForSale.map(horse => (
-                      <HorseCard horse={horse} showForSaleLabel/>
+              {horsesForSale.map((horse, i) => (
+                      <HorseCard horse={horse} priority={i === 0} showForSaleLabel/>
               ))}
             </div>
         </div>

@@ -1,5 +1,7 @@
 ---
 import Image from 'astro/components/Image.astro'
+import farm from '../assets/Gestuet1_0.jpg'
+import mareWithFoal from '../assets/LQKL0944_0.jpg'
 ---
 <div class="page-width mx-auto px-4 md:px-0">
   <div class="flex lg:flex-row flex-col items-center">
@@ -7,21 +9,21 @@ import Image from 'astro/components/Image.astro'
       <div>
         <Image
           class="size-[300px] object-cover rounded-xl shadow-2xl -rotate-6"
-          width={500}
-          height={500}
+          widths={[300, 600]}
+          sizes="300px"
           alt="Hof des Trakehner Gestüts Pichl mit großer Linde"
-          src="/Gestuet1_0.jpg"
-          loading="eager"
+          src={farm}
+          loading="lazy"
         />
       </div>
       <div class="pt-48">
         <Image
           class="size-[300px] object-cover rounded-xl shadow-2xl rotate-6"
-          width={300}
-          height={300}
+          widths={[300, 600]}
+          sizes="300px"
           alt="Stute mit Fohlen auf der Koppel"
-          src="/LQKL0944_0.jpg"
-          loading="eager"
+          src={mareWithFoal}
+          loading="lazy"
         />
       </div>
     </div>

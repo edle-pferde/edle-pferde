@@ -48,7 +48,7 @@ switch (firstPhotoCropPosition) {
       <Image
         src={image}
         alt={`${altText} – Bild ${i + 1}`}
-        loading="eager"
+        loading="lazy"
         class={`rounded aspect-square object-cover ${cropPosition}`}
       />
     </a>

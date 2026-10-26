@@ -7,9 +7,9 @@ const { article } = Astro.props;
     <Image
       src={article.data.cover_image}
       alt={article.data.title}
-      height={0}
-      width={0}
-      loading="eager"
+      widths={[640, 1024, 1440]}
+      sizes="(min-width: 1280px) 1152px, 100vw"
+      loading="lazy"
       class="object-cover z-10 rounded-lg w-full h-full"
       transition:name={`article-${article.id}`}
     />

@@ -39,9 +39,9 @@ switch (article.data.cover_image_crop_position) {
     <Image
       src={article.data.cover_image}
       alt={article.data.title}
-      height={0}
-      width={0}
-      loading="eager"
+      widths={[400, 800]}
+      sizes="(min-width: 1024px) 280px, (min-width: 768px) 50vw, 100vw"
+      loading="lazy"
       class={`object-cover z-10 rounded-lg w-full h-full ${cropPosition}`}
       transition:name={`article-${article.id}`}
     />

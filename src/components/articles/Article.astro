@@ -1,6 +1,6 @@
 ---
 import Image from "astro/components/Image.astro";
-const { article } = Astro.props;
+const { article, priority = false } = Astro.props;
 
 let cropPosition = "";
 switch (article.data.cover_image_crop_position) {
@@ -49,7 +49,8 @@ function formatDate(date: Date) {
       alt={article.data.title}
       height={768}
       width={1024}
-      loading="eager"
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : "auto"}
       class={`aspect-4/3 w-full md:w-72 object-cover ${cropPosition}`}
       transition:name={`article-${article.id}`}
     />
