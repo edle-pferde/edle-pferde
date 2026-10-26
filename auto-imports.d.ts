@@ -8,6 +8,7 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const horseImageAlt: typeof import('./src/composables/horseImageAlt').horseImageAlt
   const imageImporter: typeof import('./src/composables/imageImporter')['default']
   const reader: typeof import('./src/composables/reader').reader
   const toExcerpt: typeof import('./src/composables/excerpt').toExcerpt

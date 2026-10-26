@@ -6,7 +6,7 @@ const { article } = Astro.props;
   <div class="relative aspect-3/2 lg:aspect-2/1">
     <Image
       src={article.data.cover_image}
-      alt={`${article.id}`}
+      alt={article.data.title}
       height={0}
       width={0}
       loading="eager"

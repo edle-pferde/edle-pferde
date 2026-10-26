@@ -14,7 +14,7 @@ const {Content} = await render(aboutUs)
         <div class="prose">
             <h1>{aboutUs.data.title}</h1>
             <Content/>
-            <PhotoSwipeAll images={aboutUs.data.gallery} />
+            <PhotoSwipeAll images={aboutUs.data.gallery} altText="Trakehner Gestüt Pichl" />
         </div>
     </main>
 </Layout>

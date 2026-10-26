@@ -117,6 +117,7 @@ export async function getStaticPaths() {
     <PhotoSwipe
       images={allImages}
       firstPhotoCropPosition={horse.data.profile_picture_crop_position}
+      altText={horseImageAlt(horse.data)}
     />
     <p>
       {horse.data.bio}

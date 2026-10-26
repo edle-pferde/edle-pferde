@@ -11,6 +11,6 @@ const page = await getEntry('pages', 'galerie')
 >
   <main class="page-width mx-auto px-4 md:px-0">
     <h1 class="sr-only">Bildergalerie</h1>
-    <PhotoSwipeAll images={page.data.gallery} />
+    <PhotoSwipeAll images={page.data.gallery} altText="Impressionen vom Trakehner Gestüt Pichl" />
   </main>
 </Layout>

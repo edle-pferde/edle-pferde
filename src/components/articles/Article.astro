@@ -46,7 +46,7 @@ function formatDate(date: Date) {
   <div class="flex flex-col md:flex-row rounded bg-white overflow-auto shadow">
     <Image
       src={article.data.cover_image}
-      alt={`${article.id}`}
+      alt={article.data.title}
       height={768}
       width={1024}
       loading="eager"

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-const { images, firstPhotoCropPosition } = Astro.props;
+const { images, firstPhotoCropPosition, altText = "Trakehner Gestüt Pichl" } = Astro.props;
 
 let cropPosition = ''
 switch (firstPhotoCropPosition) {
@@ -54,7 +54,7 @@ switch (firstPhotoCropPosition) {
       {i < 5 && (
         <Image
           src={image}
-          alt={image.src}
+          alt={`${altText} – Bild ${i + 1}`}
           loading="eager"
           class={`rounded aspect-square object-cover ${cropPosition}`}
         />

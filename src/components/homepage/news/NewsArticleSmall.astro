@@ -38,7 +38,7 @@ switch (article.data.cover_image_crop_position) {
   <div class="relative md:h-full w-full aspect-3/2">
     <Image
       src={article.data.cover_image}
-      alt={`${article.id}`}
+      alt={article.data.title}
       height={0}
       width={0}
       loading="eager"

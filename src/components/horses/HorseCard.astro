@@ -44,7 +44,7 @@ switch (horse.data.profile_picture_crop_position) {
     )}
     <Image
       src={horse.data.profile_picture}
-      alt={`${horse.id}`}
+      alt={horseImageAlt(horse.data)}
       width={800}
       class={`w-full object-cover aspect-square ${cropPosition}`}
       loading="eager"
