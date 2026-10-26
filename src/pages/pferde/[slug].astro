@@ -51,8 +51,14 @@ export async function getStaticPaths() {
   const horses = await reader.collections.horses.all();
   return horses.map(horse => ({ params: { slug: horse.slug } }));
 }
+
+const schema = breadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Pferde", path: "/pferde" },
+  { name: horse.data.full_name, path: `/pferde/${slug}` },
+]);
 ---
-<Layout title={pageTitle} description={description} image={horse.data.profile_picture.src}>
+<Layout title={pageTitle} description={description} image={horse.data.profile_picture.src} schema={schema}>
   <div class="page-width mx-auto space-y-16 px-4 md:px-0">
     <div class="space-y-4">
       <div class="space-y-1">
