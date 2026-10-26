@@ -24,9 +24,9 @@ const canonicalUrl = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.s
 <!DOCTYPE html>
 <html lang="de">
   <head>
+    <meta charset="utf-8">
     <title>{title}</title>
     <meta name="description" content={description}>
-    <meta name="keywords" content="Trakehner, Pferdezucht, Gestüt, Trakehner Gestüt, Pichl, Oberösterreich, Pramendorfer, Pferde, Verkaufspferde, Sportpferde, Reitpferde">
     <meta name="author" content="Familie Pramendorfer">
     <meta name="viewport" content="width=device-width" />
     {!isNotFound && <link rel="canonical" href={canonicalUrl} />}
@@ -38,7 +38,6 @@ const canonicalUrl = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.s
     <meta property="og:type" content="website">
     <meta property="og:locale" content="de_AT">
     <meta property="og:site_name" content={SITE_NAME}>
-    <meta property="og:logo" content="https://edle-pferde.com/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
@@ -48,7 +47,7 @@ const canonicalUrl = new URL(Astro.url.pathname.replace(/(.)\/$/, "$1"), Astro.s
       <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />
     ))}
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon_dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)">
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>

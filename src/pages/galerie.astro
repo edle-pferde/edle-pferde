@@ -9,8 +9,8 @@ const page = await getEntry('pages', 'galerie')
   title="Bildergalerie"
   description="Impressionen vom Trakehner Gestüt Pichl: Fotos unserer Stuten, Fohlen und Sportpferde auf der Koppel, im Stall und auf dem Turnier."
 >
-  <main class="page-width mx-auto px-4 md:px-0">
+  <div class="page-width mx-auto px-4 md:px-0">
     <h1 class="sr-only">Bildergalerie</h1>
     <PhotoSwipeAll images={page.data.gallery} altText="Impressionen vom Trakehner Gestüt Pichl" />
-  </main>
+  </div>
 </Layout>

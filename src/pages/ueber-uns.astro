@@ -10,11 +10,11 @@ const {Content} = await render(aboutUs)
   title="Über uns"
   description="Seit 2006 züchten wir im Hausruckviertel Trakehner mit bester Rittigkeit, Interieur und Exterieur: familiär, individuell und mit viel Herz."
 >
-    <main class="page-width mx-auto px-4 md:px-0">
+    <div class="page-width mx-auto px-4 md:px-0">
         <div class="prose">
             <h1>{aboutUs.data.title}</h1>
             <Content/>
             <PhotoSwipeAll images={aboutUs.data.gallery} altText="Trakehner Gestüt Pichl" />
         </div>
-    </main>
+    </div>
 </Layout>
