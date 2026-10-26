@@ -41,9 +41,9 @@ const {horse} = Astro.props
     <Image
       class="object-cover aspect-4/3"
       src={horse.data.profile_picture}
-      alt={`${horse.id}`}
+      alt={horseImageAlt(horse.data)}
       width={960}
-      loading="eager"
+      loading="lazy"
     />
     <div class="absolute inset-0 bg-gradient-to-r from-white to-25%"></div>
   </div>

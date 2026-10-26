@@ -34,15 +34,37 @@ function formatDate(date: Date) {
     day: "numeric"
   }).format(date);
 }
+
+let description = toExcerpt(article.body);
+if (description.length < 80) {
+  description = `${description} Neuigkeiten vom Trakehner Gestüt Pichl, ${formatDate(article.data.created_at)}.`.trim();
+}
+
+const schema = [
+  newsArticleSchema({
+    headline: article.data.title.trim(),
+    path: `/news/${slug}`,
+    image: article.data.cover_image.src,
+    datePublished: article.data.created_at,
+    description,
+  }),
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "News", path: "/news" },
+    { name: article.data.title.trim(), path: `/news/${slug}` },
+  ]),
+];
 ---
-<Layout title={article.data.title} image={article.data.cover_image.src}>
+<Layout title={article.data.title} description={description} image={article.data.cover_image.src} schema={schema}>
   <div class="page-width mx-auto space-y-16">
     <Image
       src={article.data.cover_image}
-      alt={`${slug}`}
-      width={0}
+      alt={article.data.title}
+      widths={[640, 1000, 1500]}
+      sizes="(min-width: 1000px) 1000px, 100vw"
       class="aspect-2/1 object-cover md:rounded-xl w-full max-w-250 mx-auto"
       loading="eager"
+      fetchpriority="high"
     />
     <div class="space-y-16 px-4 md:px-0">
       <div class="prose-lg">
@@ -61,7 +83,7 @@ function formatDate(date: Date) {
           />
         )}
       </div>
-      <PhotoSwipe images={article.data.gallery} />
+      <PhotoSwipe images={article.data.gallery} altText={article.data.title} />
       {article.data?.horses?.length > 0 && (
         <div class="space-y-4">
           <h2>

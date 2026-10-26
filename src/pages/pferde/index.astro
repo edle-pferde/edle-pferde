@@ -8,13 +8,16 @@ horses = horses.sort((a, b) => (a.data.birth_year < b.data.birth_year) ? 1 : ((b
 const activeHorses = horses.filter(horse => horse.data.status === 'active' || horse.data.status === 'for-sale')
 ---
 
-<Layout title="Pferde">
+<Layout
+  title="Unsere Trakehner Pferde"
+  description="Alle Trakehner unseres Gestüts im Überblick: Zuchtstuten, Jungpferde und Sportpferde mit Abstammung, Fotos und Erfolgen aus Oberösterreich."
+>
     <div class="page-width mx-auto px-4 md:px-0 space-y-12">
         <div class="space-y-4 text-2xl">
             <h1>Alle Pferde</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {activeHorses.map(horse => (
-                      <HorseCard horse={horse} showForSaleLabel/>
+              {activeHorses.map((horse, i) => (
+                      <HorseCard horse={horse} priority={i === 0} showForSaleLabel/>
               ))}
             </div>
         </div>

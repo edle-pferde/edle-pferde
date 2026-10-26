@@ -5,8 +5,12 @@ import PhotoSwipeAll from "../components/PhotoSwipeAll.astro";
 
 const page = await getEntry('pages', 'galerie')
 ---
-<Layout title="Galerie">
-  <main class="page-width mx-auto px-4 md:px-0">
-    <PhotoSwipeAll images={page.data.gallery} />
-  </main>
+<Layout
+  title="Bildergalerie"
+  description="Impressionen vom Trakehner Gestüt Pichl: Fotos unserer Stuten, Fohlen und Sportpferde auf der Koppel, im Stall und auf dem Turnier."
+>
+  <div class="page-width mx-auto px-4 md:px-0">
+    <h1 class="sr-only">Bildergalerie</h1>
+    <PhotoSwipeAll images={page.data.gallery} altText="Impressionen vom Trakehner Gestüt Pichl" />
+  </div>
 </Layout>
