@@ -39,12 +39,13 @@ switch (firstPhotoCropPosition) {
   {images?.map((image, i) => (
     <a
       href={image.src}
-      class={`h-full w-full cursor-pointer hover:brightness-110 relative ${image.featured && 'row-span-2 col-span-2'}`}
+      class={`h-full w-full cursor-pointer hover:brightness-110 relative ${image.featured ? 'row-span-2 col-span-2' : ''}`}
       data-pswp-width={image.width}
       data-pswp-height={image.height}
       data-cropped="true"
       target="_blank"
       tabindex={i < 5 ? '0' : '-1'}
+      aria-hidden={i < 5 ? undefined : 'true'}
     >
       {i === 4 && images.length > 5 && (
         <div class="absolute inset-0 bg-black/50 backdrop-blur rounded flex justify-center items-center text-white">
