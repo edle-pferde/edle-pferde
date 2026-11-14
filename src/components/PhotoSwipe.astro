@@ -35,7 +35,7 @@ switch (firstPhotoCropPosition) {
     break;
 }
 ---
-<div class="pswp-gallery pswp-gallery--single-column grid grid-cols-2 lg:grid-cols-4 gap-1" id="gallery">
+<div class="pswp-gallery pswp-gallery--single-column grid grid-cols-2 lg:grid-cols-4 gap-1">
   {images?.map((image, i) => (
     <a
       href={image.src}
@@ -44,11 +44,11 @@ switch (firstPhotoCropPosition) {
       data-pswp-height={image.height}
       data-cropped="true"
       target="_blank"
-      tabindex={i < 5 ? '0' : '-1'}
-      aria-hidden={i < 5 ? undefined : 'true'}
+      hidden={i >= 5}
+      aria-label={i === 4 && images.length > 5 ? `Alle ${images.length} Bilder anzeigen (öffnet in neuem Tab)` : undefined}
     >
       {i === 4 && images.length > 5 && (
-        <div class="absolute inset-0 bg-black/50 backdrop-blur rounded flex justify-center items-center text-white">
+        <div aria-hidden="true" class="absolute inset-0 bg-black/50 backdrop-blur rounded flex justify-center items-center text-white">
           {images.length - 4} weitere Bilder
         </div>
       )}
@@ -61,6 +61,7 @@ switch (firstPhotoCropPosition) {
           class={`rounded aspect-square object-cover ${cropPosition}`}
         />
       )}
+      <span class="sr-only"> (öffnet in neuem Tab)</span>
     </a>
   ))}
 </div>
@@ -69,7 +70,7 @@ switch (firstPhotoCropPosition) {
   import "photoswipe/style.css";
 
   const lightbox = new PhotoSwipeLightbox({
-    gallery: "#gallery",
+    gallery: ".pswp-gallery",
     children: "a",
 
     mouseMovePan: true,

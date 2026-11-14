@@ -43,3 +43,4 @@ examples/**/env.d.ts
 *.code-workspace
 .vscode
 .env*
+.scratch/
