@@ -1,70 +1,78 @@
 ---
-import { IconX, IconMenu2 } from "@tabler/icons-react";
+import { IconX, IconMenu2, IconChevronDown } from "@tabler/icons-react";
 const { facebook, instagram, youtube } = await reader.singletons.social_media.read();
 import Instagram from "./../socials/instagram.astro";
 import Facebook from "./../socials/facebook.astro";
 import YouTube from "./../socials/youtube.astro";
 import Logo from "../Logo.astro";
+import { ariaCurrent } from "../../composables/currentPage";
+
+const path = Astro.url.pathname;
 ---
 <div class="lg:hidden flex flex-col z-10 relative w-full shadow mb-16">
   <div class="menu-container">
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle"
-           class="menu-label menu-button flex-1 text-center p-7 text-nowrap transition font-mono uppercase flex items-center space-x-2 bg-white w-full">
-      <span class="hamburger-icon"><IconMenu2 /></span>
-      <span class="close-icon"><IconX /></span>
-    </label>
-
-    <div class="dropdown-content bg-white w-full shadow-lg">
-      <a href="/">
+    <button
+      type="button"
+      popovertarget="mobile-menu"
+      aria-controls="mobile-menu"
+      aria-label="Menü"
+      class="menu-button flex-1 text-center p-7 text-nowrap transition font-mono uppercase flex items-center space-x-2 bg-white w-full">
+      <span class="hamburger-icon" aria-hidden="true"><IconMenu2 /></span>
+      <span class="close-icon" aria-hidden="true"><IconX /></span>
+    </button>
+    <div id="mobile-menu" popover="auto" class="dropdown-content bg-white w-full shadow-lg">
+      <a href="/" aria-current={ariaCurrent(path, "/")}>
         <div class="p-5 border-t border-gray-200">Home</div>
       </a>
-      <a href="/news">
+      <a href="/news" aria-current={ariaCurrent(path, "/news")}>
         <div class="p-5 border-t border-gray-200">News</div>
       </a>
-      <details class="border-t border-gray-200">
-        <summary class="p-5">Pferde</summary>
-        <div class="">
-          <a href="/pferde">
+      <div class="border-t border-gray-200">
+        <button
+          type="button"
+          class="submenu-trigger p-5 w-full flex justify-between items-center text-left cursor-pointer"
+          aria-expanded="false"
+          aria-controls="mobile-horse-menu">
+          <span>Pferde</span>
+          <IconChevronDown aria-hidden="true" className="submenu-chevron transition" />
+        </button>
+        <div id="mobile-horse-menu">
+          <a href="/pferde" aria-current={ariaCurrent(path, "/pferde")}>
             <div class="p-5 pl-14 border-t border-gray-200">Alle Pferde</div>
           </a>
-          <a href="/verkaufspferde">
+          <a href="/verkaufspferde" aria-current={ariaCurrent(path, "/verkaufspferde")}>
             <div class="p-5 pl-14 border-t border-gray-200">Verkaufspferde</div>
           </a>
-          <a href="/stuten">
+          <a href="/stuten" aria-current={ariaCurrent(path, "/stuten")}>
             <div class="p-5 pl-14 border-t border-gray-200">Stuten</div>
           </a>
         </div>
-      </details>
-      <a href="/ueber-uns">
+      </div>
+      <a href="/ueber-uns" aria-current={ariaCurrent(path, "/ueber-uns")}>
         <div class="p-5 border-t border-gray-200">Über uns</div>
       </a>
-      <a href="/galerie">
+      <a href="/galerie" aria-current={ariaCurrent(path, "/galerie")}>
         <div class="p-5 border-t border-gray-200">Galerie</div>
       </a>
       <a href={"https://facebook.com/" + facebook} target="_blank">
         <div class="p-5 border-t border-gray-200 flex space-x-4 hover:bg-gray-50">
           <Facebook />
-          <span>Facebook</span>
+          <span>Facebook<span class="sr-only"> (öffnet in neuem Tab)</span></span>
         </div>
       </a>
       <a href={"https://instagram.com/" + instagram} target="_blank">
         <div class="p-5 border-t border-gray-200 flex space-x-4 hover:bg-gray-50">
           <Instagram />
-          <span>Instagram</span>
+          <span>Instagram<span class="sr-only"> (öffnet in neuem Tab)</span></span>
         </div>
       </a>
       <a href={"https://youtube.com/@" + youtube} target="_blank">
         <div class="p-5 border-t border-gray-200 flex space-x-4 hover:bg-gray-50">
           <YouTube />
-          <span>YouTube</span>
+          <span>YouTube<span class="sr-only"> (öffnet in neuem Tab)</span></span>
         </div>
       </a>
     </div>
-    <label
-      for="menu-toggle"
-      class="overlay absolute bg-black hidden w-screen h-screen opacity-75 top-20 cursor-pointer">
-    </label>
   </div>
   <a href="/" class="mt-2 w-[120px] z-50 top-0 absolute m-auto inset-x-0">
     <Logo />
@@ -72,45 +80,11 @@ import Logo from "../Logo.astro";
 </div>
 
 <style>
-  #menu-toggle {
-    display: none;
-  }
-
-  .menu-button {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .dropdown-content {
-    display: none;
-  }
-
-  #menu-toggle:checked ~ .dropdown-content {
-    display: block;
-  }
-
-  #menu-toggle:checked ~ .close-button {
-    display: block !important;
-  }
-
-  #menu-toggle:checked ~ .overlay {
-    display: block !important;
-  }
-
-  .hamburger-icon {
-    display: block;
-  }
-
-  .close-icon {
-    display: none;
-  }
-
-  #menu-toggle:checked ~ .menu-label .hamburger-icon {
-    display: none;
-  }
-
-  #menu-toggle:checked ~ .menu-label .close-icon {
-    display: block;
+  .dropdown-content [aria-current] > div {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.4em;
   }
 
   .menu-container {
@@ -118,19 +92,59 @@ import Logo from "../Logo.astro";
     z-index: 50;
   }
 
+  .menu-button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    anchor-name: --mobile-menu-button;
+  }
+
+  .close-icon {
+    display: none;
+  }
+
+  .menu-button:has(+ :is(:popover-open, .\:popover-open)) .hamburger-icon {
+    display: none;
+  }
+
+  .menu-button:has(+ :is(:popover-open, .\:popover-open)) .close-icon {
+    display: block;
+  }
+
   .dropdown-content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 40;
+    position: fixed;
+    inset: auto 0;
+    /* Header height; browsers without anchor() keep this one */
+    inset-block-start: 5rem;
+    inset-block-start: anchor(--mobile-menu-button bottom);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-block-size: calc(100dvh - 5rem);
+    overflow: auto;
   }
 
-  .close-button {
-    z-index: 50;
+  .submenu-trigger[aria-expanded="true"] :global(.submenu-chevron) {
+    rotate: 180deg;
   }
 
-  .overlay {
-    z-index: 30;
+  .dropdown-content::backdrop {
+    background: rgb(0 0 0 / 0.75);
   }
 </style>
+
+<script>
+  // Collapsed from script so the links stay reachable without JS
+  const submenuTrigger = document.querySelector<HTMLButtonElement>(".submenu-trigger");
+  const submenu = document.getElementById("mobile-horse-menu");
+  if (submenuTrigger && submenu) {
+    submenu.hidden = true;
+    submenuTrigger.addEventListener("click", () => {
+      submenu.hidden = !submenu.hidden;
+      submenuTrigger.setAttribute("aria-expanded", String(!submenu.hidden));
+    });
+  }
+
+  if (!Object.hasOwn(HTMLElement.prototype, "popover")) {
+    import("@oddbird/popover-polyfill");
+  }
+</script>

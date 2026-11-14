@@ -35,7 +35,7 @@ switch (firstPhotoCropPosition) {
     break;
 }
 ---
-<div class="pswp-gallery pswp-gallery--single-column grid grid-cols-2 lg:grid-cols-4 gap-1" id="gallery">
+<div class="pswp-gallery pswp-gallery--single-column grid grid-cols-2 lg:grid-cols-4 gap-1">
   {images?.map((image, i) => (
     <a
       href={image.src}
@@ -51,6 +51,7 @@ switch (firstPhotoCropPosition) {
         loading="lazy"
         class={`rounded aspect-square object-cover ${cropPosition}`}
       />
+      <span class="sr-only"> (öffnet in neuem Tab)</span>
     </a>
   ))}
 </div>
@@ -59,7 +60,7 @@ switch (firstPhotoCropPosition) {
   import "photoswipe/style.css";
 
   const lightbox = new PhotoSwipeLightbox({
-    gallery: "#gallery",
+    gallery: ".pswp-gallery",
     children: "a",
 
     mouseMovePan: true,

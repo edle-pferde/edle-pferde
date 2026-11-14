@@ -5,28 +5,37 @@ import Instagram from "./../socials/instagram.astro"
 import Facebook from "./../socials/facebook.astro"
 import YouTube from "./../socials/youtube.astro"
 import Logo from "../Logo.astro"
+import { ariaCurrent, inSection } from "../../composables/currentPage"
+
+const path = Astro.url.pathname
+const horseSections = ["/pferde", "/verkaufspferde", "/stuten"]
 ---
 
 <div
   class="page-width text-sm xl:text-base z-10 mx-auto mb-16 hidden h-20 grid-cols-8 grid-rows-1 items-center justify-evenly divide-x divide-gray-200 border-x border-gray-200 px-8 md:px-0 lg:grid"
 >
-  <a href="/" class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/" aria-current={ariaCurrent(path, "/")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">Home</div>
   </a>
-  <a href="/news" class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/news" aria-current={ariaCurrent(path, "/news")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">News</div>
   </a>
-  <div class="group dropdown relative size-full">
+  <div class="dropdown relative size-full">
     <button
-      class="hover:bg-brand font-electrolize flex size-full items-center justify-center space-x-2 text-center text-nowrap uppercase transition hover:text-white"
+      type="button"
+      popovertarget="horse-menu"
+      aria-controls="horse-menu"
+      aria-expanded="false"
+      data-current={inSection(path, horseSections) || undefined}
+      class="dropdown-trigger hover:bg-brand font-electrolize flex size-full items-center justify-center space-x-2 text-center text-nowrap uppercase transition hover:text-white"
     >
       <span>Pferde</span>
-      <IconChevronDown />
+      <IconChevronDown aria-hidden="true" />
     </button>
-    <div class="dropdown-content absolute z-60 hidden min-w-48 bg-white shadow-lg group-focus-within:block group-hover:block divide-y divide-gray-200 border border-gray-200">
-      <a href="/pferde" class="hover:bg-brand block p-4 hover:text-white">Alle Pferde</a>
-      <a href="/verkaufspferde" class="hover:bg-brand block p-4 hover:text-white">Verkaufspferde</a>
-      <a href="/stuten" class="hover:bg-brand block p-4 hover:text-white">Stuten</a>
+    <div id="horse-menu" popover="auto" class="dropdown-content min-w-48 bg-white shadow-lg divide-y divide-gray-200 border border-gray-200">
+      <a href="/pferde" aria-current={ariaCurrent(path, "/pferde")} class="hover:bg-brand block p-4 hover:text-white">Alle Pferde</a>
+      <a href="/verkaufspferde" aria-current={ariaCurrent(path, "/verkaufspferde")} class="hover:bg-brand block p-4 hover:text-white">Verkaufspferde</a>
+      <a href="/stuten" aria-current={ariaCurrent(path, "/stuten")} class="hover:bg-brand block p-4 hover:text-white">Stuten</a>
     </div>
   </div>
   <a href="/" class="z-50 col-span-2 size-full px-4" title="Logo">
@@ -34,30 +43,125 @@ import Logo from "../Logo.astro"
       <Logo />
     </div>
   </a>
-  <a href="/ueber-uns" class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/ueber-uns" aria-current={ariaCurrent(path, "/ueber-uns")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">Über uns</div>
   </a>
-  <a href="/galerie" class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/galerie" aria-current={ariaCurrent(path, "/galerie")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">Galerie</div>
   </a>
   <div class="flex space-x-2 justify-center items-center size-full">
     <a href={"https://facebook.com/" + facebook} target="_blank">
       <span class="sr-only">Facebook</span>
+      <span class="sr-only"> (öffnet in neuem Tab)</span>
       <Facebook />
     </a>
     <a href={"https://instagram.com/" + instagram} target="_blank">
       <span class="sr-only">Instagram</span>
+      <span class="sr-only"> (öffnet in neuem Tab)</span>
       <Instagram />
     </a>
     <a href={"https://youtube.com/@" + youtube} target="_blank">
       <span class="sr-only">YouTube</span>
+      <span class="sr-only"> (öffnet in neuem Tab)</span>
       <YouTube />
     </a>
   </div>
 </div>
 
 <style>
-  .dropdown:hover .dropdown-content {
-    display: block;
+  [aria-current] > div,
+  [data-current] > span:first-child {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.4em;
+  }
+
+  .dropdown-content [aria-current] {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block, flip-inline;
+    inset: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  /* Bridge so moving the pointer into the panel keeps the hover preview open */
+  .dropdown-content::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 100%;
+    block-size: 0.5rem;
+  }
+
+  @supports not (position-area: block-end) {
+    .dropdown-content {
+      position: fixed;
+    }
   }
 </style>
+
+<script>
+  if (!Object.hasOwn(HTMLElement.prototype, "popover")) {
+    import("@oddbird/popover-polyfill");
+  }
+
+  const item = document.querySelector<HTMLElement>(".dropdown");
+  const trigger = item?.querySelector<HTMLButtonElement>(".dropdown-trigger");
+  const menu = document.getElementById("horse-menu");
+
+  if (item && trigger && menu) {
+    let previewing = false;
+    // The polyfill marks open popovers with a class instead of :popover-open
+    const isOpen = () => {
+      try { return menu.matches(":popover-open"); } catch { return menu.classList.contains(":popover-open"); }
+    };
+    const canHover = matchMedia("(hover: hover)");
+
+    menu.addEventListener("toggle", (event) => {
+      const open = (event as ToggleEvent).newState === "open";
+      trigger.setAttribute("aria-expanded", String(open));
+      if (!open) previewing = false;
+
+      // Without anchor positioning, place the panel under the trigger by hand
+      if (open && !CSS.supports("position-area", "block-end")) {
+        const t = trigger.getBoundingClientRect();
+        const size = menu.getBoundingClientRect();
+        let top = t.bottom;
+        if (top + size.height > innerHeight) top = t.top - size.height;
+        menu.style.top = `${top}px`;
+        menu.style.left = `${Math.min(Math.max(0, t.left), innerWidth - size.width)}px`;
+      }
+    });
+
+    item.addEventListener("pointerenter", (event) => {
+      if (!canHover.matches || event.pointerType === "touch" || isOpen()) return;
+      previewing = true;
+      menu.showPopover({ source: trigger } as any);
+    });
+
+    item.addEventListener("pointerleave", () => {
+      if (previewing) menu.hidePopover();
+    });
+
+    // A click while previewing pins the panel open instead of closing it
+    trigger.addEventListener("click", (event) => {
+      if (previewing) {
+        previewing = false;
+        event.preventDefault();
+      }
+    });
+
+    item.addEventListener("focusout", (event) => {
+      const next = event.relatedTarget as Node | null;
+      if (next && !item.contains(next) && isOpen()) menu.hidePopover();
+    });
+  }
+</script>
