@@ -5,9 +5,10 @@ import Instagram from "./../socials/instagram.astro";
 import Facebook from "./../socials/facebook.astro";
 import YouTube from "./../socials/youtube.astro";
 import Logo from "../Logo.astro";
-import { ariaCurrent } from "../../composables/currentPage";
+import { ariaCurrent, inSection } from "../../composables/currentPage";
 
 const path = Astro.url.pathname;
+const horseSections = ["/pferde", "/verkaufspferde", "/stuten"];
 ---
 <div class="lg:hidden flex flex-col z-10 relative w-full shadow mb-16">
   <div class="menu-container">
@@ -32,7 +33,8 @@ const path = Astro.url.pathname;
           type="button"
           class="submenu-trigger p-5 w-full flex justify-between items-center text-left cursor-pointer"
           aria-expanded="false"
-          aria-controls="mobile-horse-menu">
+          aria-controls="mobile-horse-menu"
+          data-current={inSection(path, horseSections) || undefined}>
           <span>Pferde</span>
           <IconChevronDown aria-hidden="true" className="submenu-chevron transition" />
         </button>
@@ -80,11 +82,24 @@ const path = Astro.url.pathname;
 </div>
 
 <style>
-  .dropdown-content [aria-current] > div {
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.4em;
+  /* Current page: filled brand block (hover uses brand/90) */
+  .dropdown-content [aria-current] > div,
+  .submenu-trigger[data-current] {
+    background-color: var(--color-brand);
+    color: white;
+  }
+
+  .dropdown-content a:not([aria-current]) > div:hover,
+  .submenu-trigger:hover {
+    background-color: color-mix(in srgb, var(--color-brand) 90%, transparent);
+    color: white;
+  }
+
+  @media (forced-colors: active) {
+    .dropdown-content [aria-current] > div {
+      outline: 2px solid CanvasText;
+      outline-offset: -2px;
+    }
   }
 
   .menu-container {

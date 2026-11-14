@@ -14,10 +14,10 @@ const horseSections = ["/pferde", "/verkaufspferde", "/stuten"]
 <div
   class="page-width text-sm xl:text-base z-10 mx-auto mb-16 hidden h-20 grid-cols-8 grid-rows-1 items-center justify-evenly divide-x divide-gray-200 border-x border-gray-200 px-8 md:px-0 lg:grid"
 >
-  <a href="/" aria-current={ariaCurrent(path, "/")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/" aria-current={ariaCurrent(path, "/")} class="hover:bg-brand/90! font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">Home</div>
   </a>
-  <a href="/news" aria-current={ariaCurrent(path, "/news")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/news" aria-current={ariaCurrent(path, "/news")} class="hover:bg-brand/90! font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">News</div>
   </a>
   <div class="dropdown relative size-full">
@@ -27,15 +27,15 @@ const horseSections = ["/pferde", "/verkaufspferde", "/stuten"]
       aria-controls="horse-menu"
       aria-expanded="false"
       data-current={inSection(path, horseSections) || undefined}
-      class="dropdown-trigger hover:bg-brand font-electrolize flex size-full items-center justify-center space-x-2 text-center text-nowrap uppercase transition hover:text-white"
+      class="dropdown-trigger hover:bg-brand/90! font-electrolize flex size-full items-center justify-center space-x-0.5 text-center text-nowrap uppercase transition hover:text-white"
     >
       <span>Pferde</span>
       <IconChevronDown aria-hidden="true" />
     </button>
     <div id="horse-menu" popover="auto" class="dropdown-content min-w-48 bg-white shadow-lg divide-y divide-gray-200 border border-gray-200">
-      <a href="/pferde" aria-current={ariaCurrent(path, "/pferde")} class="hover:bg-brand block p-4 hover:text-white">Alle Pferde</a>
-      <a href="/verkaufspferde" aria-current={ariaCurrent(path, "/verkaufspferde")} class="hover:bg-brand block p-4 hover:text-white">Verkaufspferde</a>
-      <a href="/stuten" aria-current={ariaCurrent(path, "/stuten")} class="hover:bg-brand block p-4 hover:text-white">Stuten</a>
+      <a href="/pferde" aria-current={ariaCurrent(path, "/pferde")} class="hover:bg-brand/90! block p-4 hover:text-white">Alle Pferde</a>
+      <a href="/verkaufspferde" aria-current={ariaCurrent(path, "/verkaufspferde")} class="hover:bg-brand/90! block p-4 hover:text-white">Verkaufspferde</a>
+      <a href="/stuten" aria-current={ariaCurrent(path, "/stuten")} class="hover:bg-brand/90! block p-4 hover:text-white">Stuten</a>
     </div>
   </div>
   <a href="/" class="z-50 col-span-2 size-full px-4" title="Logo">
@@ -43,10 +43,10 @@ const horseSections = ["/pferde", "/verkaufspferde", "/stuten"]
       <Logo />
     </div>
   </a>
-  <a href="/ueber-uns" aria-current={ariaCurrent(path, "/ueber-uns")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/ueber-uns" aria-current={ariaCurrent(path, "/ueber-uns")} class="hover:bg-brand/90! font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">Über uns</div>
   </a>
-  <a href="/galerie" aria-current={ariaCurrent(path, "/galerie")} class="hover:bg-brand font-electrolize flex size-full items-center justify-center transition hover:text-white">
+  <a href="/galerie" aria-current={ariaCurrent(path, "/galerie")} class="hover:bg-brand/90! font-electrolize flex size-full items-center justify-center transition hover:text-white">
     <div class="uppercase">Galerie</div>
   </a>
   <div class="flex space-x-2 justify-center items-center size-full">
@@ -69,16 +69,19 @@ const horseSections = ["/pferde", "/verkaufspferde", "/stuten"]
 </div>
 
 <style>
-  [aria-current] > div,
-  [data-current] > span:first-child {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.4em;
+  /* Current page: filled brand block (hover uses brand/90) */
+  [aria-current],
+  [data-current] {
+    background-color: var(--color-brand);
+    color: white;
   }
 
-  .dropdown-content [aria-current] {
-    font-weight: 600;
-    text-decoration: underline;
+  @media (forced-colors: active) {
+    [aria-current],
+    [data-current] {
+      outline: 2px solid CanvasText;
+      outline-offset: -2px;
+    }
   }
 
   .dropdown-content {
